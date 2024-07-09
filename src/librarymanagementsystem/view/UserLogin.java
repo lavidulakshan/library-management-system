@@ -298,7 +298,6 @@ public class UserLogin extends javax.swing.JFrame {
         String username = this.username.getText();
         String password = String.valueOf(Password.getText());
 
-
         if (username == null || username.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Username cannot be empty", "Validation Error", JOptionPane.ERROR_MESSAGE);
 
@@ -312,7 +311,7 @@ public class UserLogin extends javax.swing.JFrame {
         }
 
         if (password.length() < 8) {
-            JOptionPane.showMessageDialog(this, "Password must be at least 8 characters long", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Password must be at least 5 characters long", "Validation Error", JOptionPane.ERROR_MESSAGE);
 
             return;
         }
@@ -329,7 +328,7 @@ public class UserLogin extends javax.swing.JFrame {
 
         }
         System.out.println(res);
-      
+
     }
 
 }
