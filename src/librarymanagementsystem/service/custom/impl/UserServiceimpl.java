@@ -52,4 +52,11 @@ public class UserServiceimpl implements UserServise {
         return entity;
     }
 
+    @Override
+    public String getCustomer(UserDto userDto) throws Exception {
+       UserEntity entity = getItemEntity(userDto);
+        return userDao.getCustomer(entity); 
+        
+    }
+
 }

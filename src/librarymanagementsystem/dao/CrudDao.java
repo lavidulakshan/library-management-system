@@ -21,5 +21,6 @@ public interface CrudDao <T, ID> extends SuperDao{
     T get(ID id) throws Exception;
 
     ArrayList<T> getAll() throws Exception;
+    String getCustomer(T t) throws Exception;
     
 }

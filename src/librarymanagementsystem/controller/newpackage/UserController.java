@@ -13,5 +13,11 @@ public class UserController {
         return userServise.save(userDto);
 
     }
+    
+    public String getCustomer(UserDto userDto)throws Exception{
+    
+    return userServise.getCustomer(userDto);
+    
+    }
 
 }

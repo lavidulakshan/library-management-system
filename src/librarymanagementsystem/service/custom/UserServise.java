@@ -24,5 +24,7 @@ public interface UserServise  extends SuperService{
 
     public ArrayList<UserDto> getAll() throws Exception;
     
+    public String getCustomer(UserDto userDto)throws Exception;
+    
     
 }

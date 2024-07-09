@@ -319,16 +319,29 @@ public class UserLogin extends javax.swing.JFrame {
         UserDto userdto = new UserDto(username, password);
         String res = null;
         try {
-            res = userController.save(userdto);
-            JOptionPane.showMessageDialog(this, "User saved successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
 
+            String res1 = userController.getCustomer(userdto);
+
+            if ("User already exists".equals(res1)) {
+                JOptionPane.showMessageDialog(this, "User already exists", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+
+                res = userController.save(userdto);
+                JOptionPane.showMessageDialog(this, "User saved successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                clearForm();
+            }
         } catch (Exception ex) {
             Logger.getLogger(UserLogin.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "An error occurred while saving the user", "Error", JOptionPane.ERROR_MESSAGE);
-
         }
         System.out.println(res);
 
     }
 
+    public void clearForm() {
+
+        username.setText("");
+        Password.setText("");
+
+    }
 }
