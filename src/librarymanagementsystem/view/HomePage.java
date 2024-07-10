@@ -15,6 +15,7 @@ public class HomePage extends javax.swing.JFrame {
      */
     public HomePage() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -36,7 +37,7 @@ public class HomePage extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -223,7 +224,7 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton20FocusGained
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-
+new UserRegistration().setVisible(true);
      
 
     }//GEN-LAST:event_jButton20ActionPerformed

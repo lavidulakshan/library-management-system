@@ -10,8 +10,8 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public String save(UserEntity entity) throws Exception {
-        boolean isSaved = CrudUtil.executeUpdate("INSERT INTO user VALUES(?,?)",
-                entity.getUsername(), entity.getPassword());
+        boolean isSaved = CrudUtil.executeUpdate("INSERT INTO user VALUES(?,?,?)",
+                entity.getUsername(), entity.getPassword(), entity.getContactNumber());
         return isSaved ? "Success" : "Fail";
     }
 

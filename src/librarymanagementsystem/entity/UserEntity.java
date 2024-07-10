@@ -4,6 +4,7 @@ public class UserEntity {
 
     private String username;
     private String password;
+    private String contactNumber;
 
     public UserEntity() {
     }
@@ -12,6 +13,23 @@ public class UserEntity {
         this.username = username;
         this.password = password;
     }
+    
+
+    public UserEntity(String username, String password, String contactNumber) {
+        this.username = username;
+        this.password = password;
+        this.contactNumber = contactNumber;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
+
+  
 
     public String getUsername() {
         return username;
@@ -31,7 +49,9 @@ public class UserEntity {
 
     @Override
     public String toString() {
-        return "UserEntity{" + "username=" + username + ", password=" + password + '}';
+        return "UserEntity{" + "username=" + username + ", password=" + password + ", contactNumber=" + contactNumber + '}';
     }
+
+   
 
 }

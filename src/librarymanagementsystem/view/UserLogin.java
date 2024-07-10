@@ -46,7 +46,7 @@ public class UserLogin extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         username = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        Password = new javax.swing.JTextField();
+        pw = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
 
@@ -96,21 +96,21 @@ public class UserLogin extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(240, 240, 240));
         jLabel6.setText("Password");
 
-        Password.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        Password.setToolTipText("Enter your Password");
-        Password.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
-        Password.setCaretColor(new java.awt.Color(240, 240, 240));
-        Password.addActionListener(new java.awt.event.ActionListener() {
+        pw.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        pw.setToolTipText("Enter your Password");
+        pw.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        pw.setCaretColor(new java.awt.Color(240, 240, 240));
+        pw.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PasswordActionPerformed(evt);
+                pwActionPerformed(evt);
             }
         });
-        Password.addKeyListener(new java.awt.event.KeyAdapter() {
+        pw.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                PasswordKeyReleased(evt);
+                pwKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                PasswordKeyTyped(evt);
+                pwKeyTyped(evt);
             }
         });
 
@@ -150,7 +150,7 @@ public class UserLogin extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(Password, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+                                    .addComponent(pw, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
                                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(71, 71, 71)
@@ -176,7 +176,7 @@ public class UserLogin extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Password)
+                .addComponent(pw)
                 .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -227,17 +227,17 @@ public class UserLogin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_usernameKeyTyped
 
-    private void PasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordActionPerformed
+    private void pwActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_PasswordActionPerformed
+    }//GEN-LAST:event_pwActionPerformed
 
-    private void PasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PasswordKeyReleased
+    private void pwKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pwKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_PasswordKeyReleased
+    }//GEN-LAST:event_pwKeyReleased
 
-    private void PasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PasswordKeyTyped
+    private void pwKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pwKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_PasswordKeyTyped
+    }//GEN-LAST:event_pwKeyTyped
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Usersave();
@@ -281,7 +281,6 @@ public class UserLogin extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Password;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -291,48 +290,33 @@ public class UserLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField pw;
     private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 
     public void Usersave() {
         String username = this.username.getText();
-        String password = String.valueOf(Password.getText());
-
-        if (username == null || username.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Username cannot be empty", "Validation Error", JOptionPane.ERROR_MESSAGE);
-
-            return;
-        }
-
-        if (password == null || password.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Password cannot be empty", "Validation Error", JOptionPane.ERROR_MESSAGE);
-
-            return;
-        }
-
-        if (password.length() < 8) {
-            JOptionPane.showMessageDialog(this, "Password must be at least 5 characters long", "Validation Error", JOptionPane.ERROR_MESSAGE);
-
-            return;
-        }
-
-        UserDto userdto = new UserDto(username, password);
+        String password = String.valueOf(pw.getText());
+//÷
+        UserDto userDto = new UserDto(username, password);
         String res = null;
         try {
 
-            String res1 = userController.getCustomer(userdto);
+            String res1 = userController.getCustomer(userDto);
 
             if ("User already exists".equals(res1)) {
-                JOptionPane.showMessageDialog(this, "User already exists", "Error", JOptionPane.ERROR_MESSAGE);
+                new HomePage().setVisible(true);
+                this.dispose();
+
             } else {
 
-                res = userController.save(userdto);
-                JOptionPane.showMessageDialog(this, "User saved successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-                clearForm();
+//                res = userController.save(userdto);
+                JOptionPane.showMessageDialog(this, "Invalid User!", "Success", JOptionPane.ERROR_MESSAGE);
+//                clearForm();
+
             }
         } catch (Exception ex) {
             Logger.getLogger(UserLogin.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "An error occurred while saving the user", "Error", JOptionPane.ERROR_MESSAGE);
         }
         System.out.println(res);
 
@@ -341,7 +325,7 @@ public class UserLogin extends javax.swing.JFrame {
     public void clearForm() {
 
         username.setText("");
-        Password.setText("");
+        pw.setText("");
 
     }
 }

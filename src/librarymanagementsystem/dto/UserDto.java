@@ -8,6 +8,8 @@ package librarymanagementsystem.dto;
 public class UserDto {
     private String username;
     private String password;
+    
+    private String contactNumber;
 
     public UserDto() {
     }
@@ -16,6 +18,23 @@ public class UserDto {
         this.username = username;
         this.password = password;
     }
+    
+
+    public UserDto(String username, String password, String contactNumber) {
+        this.username = username;
+        this.password = password;
+        this.contactNumber = contactNumber;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
+
+  
 
     public String getUsername() {
         return username;
@@ -35,8 +54,10 @@ public class UserDto {
 
     @Override
     public String toString() {
-        return "UserDto{" + "username=" + username + ", password=" + password + '}';
+        return "UserDto{" + "username=" + username + ", password=" + password + ", contactNumber=" + contactNumber + '}';
     }
+
+   
     
     
     

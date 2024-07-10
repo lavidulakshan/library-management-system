@@ -46,9 +46,9 @@ public class UserServiceimpl implements UserServise {
     }
 
     private UserEntity getItemEntity(UserDto dto) {
-        UserEntity entity = new UserEntity(dto.getUsername(), dto.getPassword());
-        System.out.println(dto.getUsername());
-        System.out.println(dto.getPassword());
+        UserEntity entity = new UserEntity(dto.getUsername(), dto.getPassword(), dto.getContactNumber());
+//        System.out.println(dto.getUsername());
+//        System.out.println(dto.getPassword());
         return entity;
     }
 
