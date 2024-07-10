@@ -1,5 +1,6 @@
 package librarymanagementsystem.controller.newpackage;
 
+import java.util.ArrayList;
 import librarymanagementsystem.dto.UserDto;
 import librarymanagementsystem.service.ServiceFactory;
 import librarymanagementsystem.service.custom.UserServise;
@@ -18,6 +19,11 @@ public class UserController {
 
         return userServise.getCustomer(userDto);
 
+    }
+    public ArrayList<UserDto> getAll()throws Exception{
+    
+    
+    return userServise.getAll();
     }
 
 }

@@ -42,7 +42,15 @@ public class UserServiceimpl implements UserServise {
 
     @Override
     public ArrayList<UserDto> getAll() throws Exception {
-        return null;
+         ArrayList<UserDto> userDtos = new ArrayList<>();
+        ArrayList<UserEntity> userEntitys = userDao.getAll();
+        for (UserEntity userEntity : userEntitys) {
+             UserDto dto = getItemDto(userEntity);
+            userDtos.add(dto);
+            
+        }
+        return userDtos;
+       
     }
 
     private UserEntity getItemEntity(UserDto dto) {
@@ -57,6 +65,13 @@ public class UserServiceimpl implements UserServise {
        UserEntity entity = getItemEntity(userDto);
         return userDao.getCustomer(entity); 
         
+    }
+    
+      private UserDto getItemDto(UserEntity entity) {
+        UserDto itemDto = new UserDto(entity.getUsername(),
+                entity.getPassword(),
+                entity.getContactNumber());
+        return itemDto;
     }
 
 }

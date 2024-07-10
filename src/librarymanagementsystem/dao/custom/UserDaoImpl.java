@@ -32,7 +32,14 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public ArrayList<UserEntity> getAll() throws Exception {
-        return null;
+        ArrayList<UserEntity> userEntitys = new ArrayList<>();
+        ResultSet rst = CrudUtil.executeQuery("SELECT * FROM user");
+        while (rst.next()) {
+            UserEntity entity = new UserEntity(rst.getString("username"), rst.getString("password"), rst.getString("contact_number"));
+            userEntitys.add(entity);
+        }
+
+        return userEntitys;
     }
 
     @Override
