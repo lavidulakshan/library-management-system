@@ -4,7 +4,9 @@
  */
 package librarymanagementsystem.view;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import librarymanagementsystem.controller.newpackage.UserController;
 import librarymanagementsystem.dto.UserDto;
 
@@ -23,6 +25,7 @@ public class UserRegistration extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.userController = new UserController();
+        loadTable();
     }
 
     /**
@@ -198,22 +201,22 @@ public class UserRegistration extends javax.swing.JFrame {
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
-                        .addGap(6, 6, 6))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addGap(12, 12, 12))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(13, 13, 13)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -223,7 +226,8 @@ public class UserRegistration extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        userSave();
+userSave();
+
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -308,20 +312,63 @@ public class UserRegistration extends javax.swing.JFrame {
     private javax.swing.JTextField pw1;
     // End of variables declaration//GEN-END:variables
 public void userSave() {
-        UserDto userDto = new UserDto(name1.getText(), pw1.getText(), cntctnb.getText());
-//        
-//        System.out.println(name1.getText());
-//         System.out.println(pw1.getText());
-//          System.out.println(cntctnb.getText());
-        try {
-            String res = userController.save(userDto);
+        String name = name1.getText();
+        String password = pw1.getText();
+        String cntctnb = this.cntctnb.getText();
+        if (name.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Enter your Name", "Error", JOptionPane.ERROR_MESSAGE);
 
-            JOptionPane.showMessageDialog(this, "User Added Successfully", "Error", JOptionPane.INFORMATION_MESSAGE);
+        } else if (password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Enter Your Password ", "Error", JOptionPane.ERROR_MESSAGE);
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "An Error Ocuured While Saving The User", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (cntctnb.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Enter Your Mobile", "Error", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+
+            try {
+                UserDto userDto = new UserDto(name, password, cntctnb);
+                String res = userController.getCustomer(userDto);
+
+                if ("User already exists".equals(res)) {
+                    JOptionPane.showMessageDialog(this, "Invalid User Already Exists!", "Success", JOptionPane.ERROR_MESSAGE);
+
+                } else {
+
+//                res = userController.save(userdto);
+                    JOptionPane.showMessageDialog(this, "Successfully added!", "Success", JOptionPane.ERROR_MESSAGE);
+                clearForm();
+//                    userSave();
+
+                }
+            } catch (Exception e) {
+            }
 
         }
+    }
+
+    private void loadTable() {
+        try {
+            String[] columns = {"Name", "Password", "Mobile"};
+            DefaultTableModel dtm = new DefaultTableModel(columns, 0) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+
+            };
+            jTable1.setModel(dtm);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }
+
+    public void clearForm() {
+
+        name1.setText("");
+        pw1.setText("");
+        cntctnb.setText("");
 
     }
 
