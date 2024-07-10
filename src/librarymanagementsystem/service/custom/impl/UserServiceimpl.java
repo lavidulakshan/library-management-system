@@ -32,7 +32,7 @@ public class UserServiceimpl implements UserServise {
 
     @Override
     public String delete(String code) throws Exception {
-        return null;
+       return userDao.delete(code);
     }
 
     @Override

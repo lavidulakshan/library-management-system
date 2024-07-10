@@ -21,8 +21,9 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public String delete(String id) throws Exception {
-        return null;
+    public String delete(String username) throws Exception {
+        boolean isDeleted = CrudUtil.executeUpdate("DELETE FROM user WHERE username =?", username);
+        return isDeleted ?"success" :"fail";
     }
 
     @Override

@@ -20,7 +20,7 @@ public class UserRegistration extends javax.swing.JFrame {
      * Creates new form UserRegistration
      */
     private UserController userController;
-    
+
     public UserRegistration() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -47,6 +47,7 @@ public class UserRegistration extends javax.swing.JFrame {
         cntctnb = new javax.swing.JTextField();
         name1 = new javax.swing.JTextField();
         pw1 = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -59,7 +60,7 @@ public class UserRegistration extends javax.swing.JFrame {
         jLabel4.setText("Contact Number");
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jButton1.setText("Create Account");
+        jButton1.setText("Delete");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -113,6 +114,14 @@ public class UserRegistration extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jButton2.setText("Create Account");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -125,20 +134,24 @@ public class UserRegistration extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(pw1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(name1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cntctnb, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(pw1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(name1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(cntctnb, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -160,9 +173,11 @@ public class UserRegistration extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(cntctnb, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addGap(12, 12, 12))
         );
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -186,6 +201,11 @@ public class UserRegistration extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -226,8 +246,7 @@ public class UserRegistration extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        userSave();
-        
+        deleteUser();
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -240,7 +259,7 @@ public class UserRegistration extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel9MouseEntered
 
     private void jLabel9MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseExited
-        
+
 
     }//GEN-LAST:event_jLabel9MouseExited
 
@@ -259,6 +278,21 @@ public class UserRegistration extends javax.swing.JFrame {
     private void pw1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pw1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_pw1ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        if (evt.getClickCount() == 2) {
+            int row = jTable1.getSelectedRow();
+
+            name1.setText(String.valueOf(jTable1.getValueAt(row, 0)));
+            pw1.setText(String.valueOf(jTable1.getValueAt(row, 1)));
+            cntctnb.setText(String.valueOf(jTable1.getValueAt(row, 2)));
+
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -298,6 +332,7 @@ public class UserRegistration extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cntctnb;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
@@ -317,24 +352,24 @@ public void userSave() {
         String cntctnb = this.cntctnb.getText();
         if (name.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Enter your Name", "Error", JOptionPane.ERROR_MESSAGE);
-            
+
         } else if (password.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Enter Your Password ", "Error", JOptionPane.ERROR_MESSAGE);
-            
+
         } else if (cntctnb.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Enter Your Mobile", "Error", JOptionPane.ERROR_MESSAGE);
-            
+
         } else {
-            
+
             try {
                 UserDto userDto = new UserDto(name, password, cntctnb);
                 String res = userController.getCustomer(userDto);
-                
+
                 if ("User already exists".equals(res)) {
                     JOptionPane.showMessageDialog(this, "Invalid User Already Exists!", "Success", JOptionPane.ERROR_MESSAGE);
-                    
+
                 } else {
-                    
+
                     String res1 = userController.save(userDto);
 
 //                res = userController.save(userdto);
@@ -346,10 +381,10 @@ public void userSave() {
                 }
             } catch (Exception e) {
             }
-            
+
         }
     }
-    
+
     private void loadTable() {
         try {
             String[] columns = {"Name", "Password", "Mobile"};
@@ -358,28 +393,50 @@ public void userSave() {
                 public boolean isCellEditable(int row, int column) {
                     return false;
                 }
-                
+
             };
             jTable1.setModel(dtm);
-            
+
             ArrayList<UserDto> userDtos = userController.getAll();
             for (UserDto userDto : userDtos) {
                 Object[] rowData = {userDto.getUsername(), userDto.getPassword(), userDto.getContactNumber()};
                 dtm.addRow(rowData);
-                
+
             }
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }
-    
+
     public void clearForm() {
-        
+
         name1.setText("");
         pw1.setText("");
         cntctnb.setText("");
-        
+
     }
-    
+
+    public void deleteUser() {
+
+        try {
+            String res = userController.delete(name1.getText());
+
+            if ("success".equals(res)) {
+                JOptionPane.showMessageDialog(this, "Successfully Delete The User!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                clearForm();
+                loadTable();
+                
+
+            } else {
+                JOptionPane.showMessageDialog(this, "An error occured while deleting user!", "Error", JOptionPane.ERROR_MESSAGE);
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
 }

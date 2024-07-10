@@ -25,5 +25,11 @@ public class UserController {
     
     return userServise.getAll();
     }
+    
+    public String delete(String userName)throws Exception{
+        return userServise.delete(userName);
+    
+    
+    }
 
 }
