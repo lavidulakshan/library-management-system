@@ -20,7 +20,7 @@ public class UserRegistration extends javax.swing.JFrame {
      * Creates new form UserRegistration
      */
     private UserController userController;
-
+    
     public UserRegistration() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -52,6 +52,7 @@ public class UserRegistration extends javax.swing.JFrame {
         jTextField6 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButton10 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -208,6 +209,14 @@ public class UserRegistration extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
+        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/librarymanagementsystem/img/reset.png"))); // NOI18N
+        jButton10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -219,27 +228,33 @@ public class UserRegistration extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
-                        .addGap(12, 12, 12))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton10))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(13, 13, 13)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -251,7 +266,8 @@ public class UserRegistration extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
-
+        new security().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void jLabel9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseEntered
@@ -259,7 +275,7 @@ public class UserRegistration extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel9MouseEntered
 
     private void jLabel9MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseExited
-
+        
 
     }//GEN-LAST:event_jLabel9MouseExited
 
@@ -282,17 +298,22 @@ public class UserRegistration extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         if (evt.getClickCount() == 2) {
             int row = jTable1.getSelectedRow();
-
+            
             name1.setText(String.valueOf(jTable1.getValueAt(row, 0)));
             pw1.setText(String.valueOf(jTable1.getValueAt(row, 1)));
             cntctnb.setText(String.valueOf(jTable1.getValueAt(row, 2)));
-
+            
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+       userSave();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+       clearForm();
+       loadTable();
+    }//GEN-LAST:event_jButton10ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -332,7 +353,15 @@ public class UserRegistration extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cntctnb;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
@@ -352,24 +381,24 @@ public void userSave() {
         String cntctnb = this.cntctnb.getText();
         if (name.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Enter your Name", "Error", JOptionPane.ERROR_MESSAGE);
-
+            
         } else if (password.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Enter Your Password ", "Error", JOptionPane.ERROR_MESSAGE);
-
+            
         } else if (cntctnb.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Enter Your Mobile", "Error", JOptionPane.ERROR_MESSAGE);
-
+            
         } else {
-
+            
             try {
                 UserDto userDto = new UserDto(name, password, cntctnb);
                 String res = userController.getCustomer(userDto);
-
+                
                 if ("User already exists".equals(res)) {
                     JOptionPane.showMessageDialog(this, "Invalid User Already Exists!", "Success", JOptionPane.ERROR_MESSAGE);
-
+                    
                 } else {
-
+                    
                     String res1 = userController.save(userDto);
 
 //                res = userController.save(userdto);
@@ -381,10 +410,10 @@ public void userSave() {
                 }
             } catch (Exception e) {
             }
-
+            
         }
     }
-
+    
     private void loadTable() {
         try {
             String[] columns = {"Name", "Password", "Mobile"};
@@ -393,50 +422,49 @@ public void userSave() {
                 public boolean isCellEditable(int row, int column) {
                     return false;
                 }
-
+                
             };
             jTable1.setModel(dtm);
-
+            
             ArrayList<UserDto> userDtos = userController.getAll();
             for (UserDto userDto : userDtos) {
                 Object[] rowData = {userDto.getUsername(), userDto.getPassword(), userDto.getContactNumber()};
                 dtm.addRow(rowData);
-
+                
             }
-
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }
-
+    
     public void clearForm() {
-
+        
         name1.setText("");
         pw1.setText("");
         cntctnb.setText("");
-
+        
     }
-
+    
     public void deleteUser() {
-
+        
         try {
             String res = userController.delete(name1.getText());
-
+            
             if ("success".equals(res)) {
                 JOptionPane.showMessageDialog(this, "Successfully Delete The User!", "Success", JOptionPane.INFORMATION_MESSAGE);
                 clearForm();
                 loadTable();
                 
-
             } else {
                 JOptionPane.showMessageDialog(this, "An error occured while deleting user!", "Error", JOptionPane.ERROR_MESSAGE);
-
+                
             }
-
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        
     }
-
+    
 }

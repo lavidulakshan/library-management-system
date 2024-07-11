@@ -18,6 +18,8 @@ public class UserLogin extends javax.swing.JFrame {
 
     private UserController userController;
 
+    public static String user;
+
     /**
      * Creates new form UserLogin
      */
@@ -297,6 +299,7 @@ public class UserLogin extends javax.swing.JFrame {
     public void Usersave() {
         String username = this.username.getText();
         String password = String.valueOf(pw.getText());
+        user = username;
 //÷
         UserDto userDto = new UserDto(username, password);
         String res = null;
