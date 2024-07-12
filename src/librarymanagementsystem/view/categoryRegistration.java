@@ -4,6 +4,7 @@
  */
 package librarymanagementsystem.view;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import librarymanagementsystem.controller.newpackage.CategoryController;
 import librarymanagementsystem.dto.CategoryDto;
@@ -195,22 +196,32 @@ public class categoryRegistration extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public void saveCategory() {
-        CategoryDto categoryDto = new CategoryDto(jTextField1.getText(), jTextArea1.getText());
+    String categoryName = jTextField1.getText().trim();
+    String categoryDescription = jTextArea1.getText().trim();
+    
+    if (categoryName.isEmpty() || categoryDescription.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Both category name and description are required.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
 
-        try {
+    CategoryDto categoryDto = new CategoryDto(categoryName, categoryDescription);
 
-            String res = categoryController.Save(categoryDto);
+    try {
+        String res = categoryController.Save(categoryDto);
 
-            if (res.equals("success")) {
-                System.out.println("success");
-
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (res.equals("Success")) {
+            JOptionPane.showMessageDialog(this, "Category Added Successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            clearForm();
+        } else {
+            JOptionPane.showMessageDialog(this, "Failed to add category. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "An error occurred while adding the category.", "Error", JOptionPane.ERROR_MESSAGE);
     }
+}
+
 
     public void loadTable() {
 
@@ -224,6 +235,12 @@ public class categoryRegistration extends javax.swing.JFrame {
 
         };
         jTable1.setModel(dtm);
+
+    }
+
+    public void clearForm() {
+        jTextField1.setText("");
+        jTextArea1.setText("");
 
     }
 
