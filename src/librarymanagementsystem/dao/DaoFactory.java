@@ -1,6 +1,7 @@
 
 package librarymanagementsystem.dao;
 
+import librarymanagementsystem.dao.custom.CategoryDaoImpl;
 import librarymanagementsystem.dao.custom.UserDaoImpl;
 
 public class DaoFactory {
@@ -21,13 +22,15 @@ public class DaoFactory {
         switch (type) {
             case USER:
                 return new UserDaoImpl();
+                  case CATEGORY:
+                return new CategoryDaoImpl();
             default:
                 return null;
         }
     }
 
     public enum DaoTypes {
-        USER, CUSTOMER, ORDER, ORDER_DETAIL
+        USER, CATEGORY, ORDER, ORDER_DETAIL
     }
     
 }

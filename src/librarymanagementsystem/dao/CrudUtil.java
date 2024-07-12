@@ -1,4 +1,3 @@
-
 package librarymanagementsystem.dao;
 
 import java.sql.Connection;
@@ -6,9 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import librarymanagementsystem.db.DBConnection;
 
-
 public class CrudUtil {
-    
+
     public static PreparedStatement getPreparedStatement(String sql, Object... args) throws Exception {
         Connection connection = DBConnection.getInstance().getConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
@@ -28,5 +26,4 @@ public class CrudUtil {
         return getPreparedStatement(sql, agrs).executeQuery();
     }
 
-    
 }

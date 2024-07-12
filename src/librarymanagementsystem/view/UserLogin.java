@@ -314,12 +314,13 @@ public class UserLogin extends javax.swing.JFrame {
             } else {
 
 //                res = userController.save(userdto);
-                JOptionPane.showMessageDialog(this, "Invalid User!", "Success", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Invalid User!", "Error", JOptionPane.ERROR_MESSAGE);
 //                clearForm();
 
             }
         } catch (Exception ex) {
-            Logger.getLogger(UserLogin.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(UserLogin.class.getName()).log(Level.SEVERE, null, ex);
+ex.printStackTrace();
         }
         System.out.println(res);
 

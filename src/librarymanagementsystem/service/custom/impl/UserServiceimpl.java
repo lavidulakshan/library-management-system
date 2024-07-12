@@ -22,6 +22,9 @@ public class UserServiceimpl implements UserServise {
     @Override
     public String save(UserDto dto) throws Exception {
         UserEntity entity = getItemEntity(dto);
+//        System.out.println(entity.getContactNumber());
+//         System.out.println(entity.getUsername());
+//          System.out.println(entity.getPassword());
         return userDao.save(entity);
     }
 
@@ -55,8 +58,8 @@ public class UserServiceimpl implements UserServise {
 
     private UserEntity getItemEntity(UserDto dto) {
         UserEntity entity = new UserEntity(dto.getUsername(), dto.getPassword(), dto.getContactNumber());
-//        System.out.println(dto.getUsername());
-//        System.out.println(dto.getPassword());
+        
+        
         return entity;
     }
 
@@ -71,6 +74,8 @@ public class UserServiceimpl implements UserServise {
         UserDto itemDto = new UserDto(entity.getUsername(),
                 entity.getPassword(),
                 entity.getContactNumber());
+//          System.out.println(entity.getUsername());
+//          System.out.println(entity.getPassword());
         return itemDto;
     }
 

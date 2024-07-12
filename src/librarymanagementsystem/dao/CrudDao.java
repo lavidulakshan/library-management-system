@@ -11,8 +11,9 @@ import librarymanagementsystem.dao.SuperDao;
  *
  * @author lavidulakshan
  */
-public interface CrudDao <T, ID> extends SuperDao{
-     String save(T t) throws Exception;
+public interface CrudDao<T, ID> extends SuperDao {
+
+    String save(T t) throws Exception;
 
     String update(T t) throws Exception;
 
@@ -21,6 +22,7 @@ public interface CrudDao <T, ID> extends SuperDao{
     T get(ID id) throws Exception;
 
     ArrayList<T> getAll() throws Exception;
+
     String getCustomer(T t) throws Exception;
-    
+
 }

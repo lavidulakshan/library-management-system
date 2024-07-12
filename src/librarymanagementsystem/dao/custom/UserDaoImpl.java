@@ -10,7 +10,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public String save(UserEntity entity) throws Exception {
-        boolean isSaved = CrudUtil.executeUpdate("INSERT INTO user VALUES(?,?,?)",
+          boolean isSaved = CrudUtil.executeUpdate("INSERT INTO user VALUES(?,?,?)",
                 entity.getUsername(), entity.getPassword(), entity.getContactNumber());
         return isSaved ? "Success" : "Fail";
     }
@@ -23,7 +23,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public String delete(String username) throws Exception {
         boolean isDeleted = CrudUtil.executeUpdate("DELETE FROM user WHERE username =?", username);
-        return isDeleted ?"success" :"fail";
+        return isDeleted ? "success" : "fail";
     }
 
     @Override
@@ -37,6 +37,9 @@ public class UserDaoImpl implements UserDao {
         ResultSet rst = CrudUtil.executeQuery("SELECT * FROM user");
         while (rst.next()) {
             UserEntity entity = new UserEntity(rst.getString("username"), rst.getString("password"), rst.getString("contact_number"));
+//            System.out.println(rst.getString("username"));
+//                   System.out.println(rst.getString("password"));
+//                          System.out.println(rst.getString("contact_number"));
             userEntitys.add(entity);
         }
 

@@ -20,7 +20,7 @@ public class UserRegistration extends javax.swing.JFrame {
      * Creates new form UserRegistration
      */
     private UserController userController;
-    
+
     public UserRegistration() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -275,7 +275,7 @@ public class UserRegistration extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel9MouseEntered
 
     private void jLabel9MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseExited
-        
+
 
     }//GEN-LAST:event_jLabel9MouseExited
 
@@ -298,21 +298,23 @@ public class UserRegistration extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         if (evt.getClickCount() == 2) {
             int row = jTable1.getSelectedRow();
-            
+
             name1.setText(String.valueOf(jTable1.getValueAt(row, 0)));
             pw1.setText(String.valueOf(jTable1.getValueAt(row, 1)));
             cntctnb.setText(String.valueOf(jTable1.getValueAt(row, 2)));
-            
+
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       userSave();
+        userSave();
+
+//        System.out.println("succss");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-       clearForm();
-       loadTable();
+        clearForm();
+        loadTable();
     }//GEN-LAST:event_jButton10ActionPerformed
 
     /**
@@ -379,41 +381,51 @@ public void userSave() {
         String name = name1.getText();
         String password = pw1.getText();
         String cntctnb = this.cntctnb.getText();
+//        System.out.println(name);
+//           System.out.println(password);
+//              System.out.println(cntctnb);
         if (name.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Enter your Name", "Error", JOptionPane.ERROR_MESSAGE);
-            
+
         } else if (password.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Enter Your Password ", "Error", JOptionPane.ERROR_MESSAGE);
-            
+
         } else if (cntctnb.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Enter Your Mobile", "Error", JOptionPane.ERROR_MESSAGE);
-            
+
         } else {
-            
+
             try {
                 UserDto userDto = new UserDto(name, password, cntctnb);
                 String res = userController.getCustomer(userDto);
-                
+
                 if ("User already exists".equals(res)) {
                     JOptionPane.showMessageDialog(this, "Invalid User Already Exists!", "Success", JOptionPane.ERROR_MESSAGE);
-                    
+
                 } else {
-                    
+
                     String res1 = userController.save(userDto);
 
-//                res = userController.save(userdto);
-                    JOptionPane.showMessageDialog(this, "Successfully added!", "Success", JOptionPane.INFORMATION_MESSAGE);
-                    clearForm();
-                    loadTable();
-//                    userSave();
+                    if ("Success".equals(res1)) {
+                        JOptionPane.showMessageDialog(this, "Successfully added!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                        clearForm();
+                        loadTable();
 
+                    } else {
+                        JOptionPane.showMessageDialog(this, "error!", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+                    }
+
+//                res = userController.save(userdto);
+//                    userSave();
                 }
             } catch (Exception e) {
+                e.printStackTrace();
             }
-            
+
         }
     }
-    
+
     private void loadTable() {
         try {
             String[] columns = {"Name", "Password", "Mobile"};
@@ -422,49 +434,53 @@ public void userSave() {
                 public boolean isCellEditable(int row, int column) {
                     return false;
                 }
-                
+
             };
             jTable1.setModel(dtm);
-            
+
             ArrayList<UserDto> userDtos = userController.getAll();
             for (UserDto userDto : userDtos) {
                 Object[] rowData = {userDto.getUsername(), userDto.getPassword(), userDto.getContactNumber()};
                 dtm.addRow(rowData);
-                
+
             }
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }
-    
+
     public void clearForm() {
-        
+
         name1.setText("");
         pw1.setText("");
         cntctnb.setText("");
-        
+
     }
-    
+
     public void deleteUser() {
-        
+
         try {
-            String res = userController.delete(name1.getText());
-            
-            if ("success".equals(res)) {
-                JOptionPane.showMessageDialog(this, "Successfully Delete The User!", "Success", JOptionPane.INFORMATION_MESSAGE);
-                clearForm();
+//            String res = userController.delete(name1.getText());
+
+            int option = JOptionPane.showConfirmDialog(this, "Do you sure want to elete The User?", "Warning", JOptionPane.YES_OPTION, JOptionPane.WARNING_MESSAGE);
+
+            if (option == JOptionPane.YES_OPTION) {
+                JOptionPane.showMessageDialog(this, "User Deleted Successfully!", "Succes", JOptionPane.INFORMATION_MESSAGE);
+                String res = userController.delete(name1.getText());
+
+//                this.dispose();
+//                    System.exit(0);
                 loadTable();
-                
             } else {
-                JOptionPane.showMessageDialog(this, "An error occured while deleting user!", "Error", JOptionPane.ERROR_MESSAGE);
-                
+                clearForm();
+
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
     }
-    
+
 }

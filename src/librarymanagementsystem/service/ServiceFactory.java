@@ -1,5 +1,6 @@
 package librarymanagementsystem.service;
 
+import librarymanagementsystem.service.custom.impl.CategoryserviceImpl;
 import librarymanagementsystem.service.custom.impl.UserServiceimpl;
 
 public class ServiceFactory {
@@ -21,6 +22,8 @@ public class ServiceFactory {
         switch (type) {
             case USER:
                 return new UserServiceimpl();
+                   case CATEGORY:
+                return new CategoryserviceImpl();
 
             default:
                 return null;
@@ -28,7 +31,7 @@ public class ServiceFactory {
     }
 
     public enum ServiceType {
-        USER, CUSTOMER, ORDER
+        USER, CATEGORY, ORDER
     }
 
 }
