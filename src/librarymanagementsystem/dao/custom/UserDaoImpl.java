@@ -5,6 +5,8 @@ import librarymanagementsystem.dao.custom.UserDao;
 import librarymanagementsystem.entity.UserEntity;
 import librarymanagementsystem.dao.CrudUtil;
 import java.sql.ResultSet;
+import java.util.List;
+import librarymanagementsystem.dto.CategoryDto;
 
 public class UserDaoImpl implements UserDao {
 

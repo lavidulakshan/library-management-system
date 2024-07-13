@@ -4,7 +4,7 @@ package librarymanagementsystem.dto;
 
 public class CategoryDto {
     
-    
+    private int id;
     private String name;
     private String description;
 
@@ -15,6 +15,16 @@ public class CategoryDto {
         this.name = name;
         this.description = description;
     }
+    
+    
+
+    public CategoryDto(int id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+    }
+
+    
 
     public String getName() {
         return name;
@@ -32,10 +42,20 @@ public class CategoryDto {
         this.description = description;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
-        return "CategoryDto{" + "name=" + name + ", description=" + description + '}';
+        return "CategoryDto{" + "id=" + id + ", name=" + name + ", description=" + description + '}';
     }
+    
+    
     
     
 }

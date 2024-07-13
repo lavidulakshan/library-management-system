@@ -4,11 +4,22 @@
  */
 package librarymanagementsystem.view;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import librarymanagementsystem.controller.newpackage.CategoryController;
+import librarymanagementsystem.controller.newpackage.UserController;
+import librarymanagementsystem.dto.CategoryDto;
+import librarymanagementsystem.entity.CategoryEntity;
+
 /**
  *
  * @author lavidulakshan
  */
 public class bookRegistration extends javax.swing.JFrame {
+    
+    private CategoryController categoryController;
+    List<CategoryDto> list;
 
     /**
      * Creates new form bookRegistration
@@ -16,6 +27,14 @@ public class bookRegistration extends javax.swing.JFrame {
     public bookRegistration() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.categoryController = new CategoryController();
+        
+        list = getDropDownData();
+
+        DefaultComboBoxModel<CategoryDto> comboBoxModel = new DefaultComboBoxModel<>();
+        for (CategoryDto itemList : list) {
+            comboCategory.addItem(itemList.getName());
+        }
     }
 
     /**
@@ -32,7 +51,7 @@ public class bookRegistration extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        comboCategory = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
@@ -70,10 +89,15 @@ public class bookRegistration extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel3.setText("Category");
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+        comboCategory.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        comboCategory.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBox1ItemStateChanged(evt);
+                comboCategoryItemStateChanged(evt);
+            }
+        });
+        comboCategory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboCategoryActionPerformed(evt);
             }
         });
 
@@ -156,7 +180,7 @@ public class bookRegistration extends javax.swing.JFrame {
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGap(52, 52, 52)
-                                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(comboCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -185,7 +209,7 @@ public class bookRegistration extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel3)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(comboCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -221,8 +245,7 @@ public class bookRegistration extends javax.swing.JFrame {
                         .addGap(75, 75, 75)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -245,31 +268,35 @@ public class bookRegistration extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
-       
+
     }//GEN-LAST:event_jTextField1KeyReleased
 
-    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
-      
-    }//GEN-LAST:event_jComboBox1ItemStateChanged
+    private void comboCategoryItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboCategoryItemStateChanged
+        
+    }//GEN-LAST:event_comboCategoryItemStateChanged
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        
+            System.out.println("Id :"+list.get(comboCategory.getSelectedIndex()));
+            
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-      
+
     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void jLabel6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseEntered
-       
+
     }//GEN-LAST:event_jLabel6MouseEntered
 
     private void jLabel6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseExited
-      
+
     }//GEN-LAST:event_jLabel6MouseExited
 
     private void jTextField3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyReleased
-       
+
     }//GEN-LAST:event_jTextField3KeyReleased
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -284,6 +311,29 @@ public class bookRegistration extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private void comboCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCategoryActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboCategoryActionPerformed
+
+    private List<CategoryDto> getDropDownData(){
+        try{
+            List<CategoryEntity> categoryEntityList=this.categoryController.getDropDownData();
+            List<CategoryDto> categoryDtos = new ArrayList<>();
+            for(CategoryEntity categoryEntity: categoryEntityList){
+                CategoryDto categoryDto = new CategoryDto();
+                categoryDto.setDescription(categoryEntity.getDescription());
+                categoryDto.setId(categoryEntity.getCategoryId());
+                categoryDto.setName(categoryEntity.getName());
+                
+                categoryDtos.add(categoryDto);
+            }
+            
+            return categoryDtos;
+        }catch(Exception ex){
+            ex.printStackTrace();
+            return null;
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -320,8 +370,8 @@ public class bookRegistration extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> comboCategory;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

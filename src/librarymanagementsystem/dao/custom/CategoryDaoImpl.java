@@ -4,8 +4,11 @@
  */
 package librarymanagementsystem.dao.custom;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 import librarymanagementsystem.dao.CrudUtil;
+import librarymanagementsystem.dto.CategoryDto;
 import librarymanagementsystem.entity.CategoryEntity;
 
 /**
@@ -38,7 +41,19 @@ public class CategoryDaoImpl implements CategoryDao {
 
     @Override
     public ArrayList<CategoryEntity> getAll() throws Exception {
-        return null;
+        ResultSet rs = CrudUtil.executeQuery("select category_id,name,description from Category");
+        ArrayList<CategoryEntity> list= new ArrayList<>();
+        while (rs.next()) {
+            CategoryEntity categoryEntity = new CategoryEntity();
+            categoryEntity.setDescription(rs.getString("description"));
+            categoryEntity.setCategoryId(rs.getInt("category_id"));
+            categoryEntity.setName(rs.getString("name"));
+            
+            list.add(categoryEntity);
+            
+        }
+        
+        return list;
     }
 
     @Override

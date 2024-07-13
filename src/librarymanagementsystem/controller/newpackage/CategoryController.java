@@ -1,6 +1,8 @@
 package librarymanagementsystem.controller.newpackage;
 
+import java.util.List;
 import librarymanagementsystem.dto.CategoryDto;
+import librarymanagementsystem.entity.CategoryEntity;
 import librarymanagementsystem.service.ServiceFactory;
 import librarymanagementsystem.service.custom.CategoryService;
 
@@ -12,6 +14,10 @@ public class CategoryController {
 
         return categoryService.save(categoryDto);
 
+    }
+    
+    public List<CategoryEntity> getDropDownData()throws Exception{
+        return categoryService.getCategoryData();
     }
 
 }

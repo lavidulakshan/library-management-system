@@ -4,6 +4,8 @@
  */
 package librarymanagementsystem.service.custom.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import librarymanagementsystem.dao.DaoFactory;
 import librarymanagementsystem.dao.custom.CategoryDao;
 import librarymanagementsystem.dao.custom.UserDao;
@@ -32,6 +34,11 @@ public class CategoryserviceImpl implements CategoryService {
         CategoryEntity categoryEntity = new CategoryEntity(dto.getName(), dto.getDescription());
 
         return categoryEntity;
+    }
+
+    @Override
+    public List<CategoryEntity> getCategoryData() throws Exception {
+        return CategoryDao.getAll();
     }
 
 }

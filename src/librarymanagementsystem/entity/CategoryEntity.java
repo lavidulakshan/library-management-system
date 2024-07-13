@@ -4,7 +4,7 @@ package librarymanagementsystem.entity;
 
 public class CategoryEntity {
     
-    private String categoryId;
+    private int categoryId;
     private String name;
     private String description;
 
@@ -18,18 +18,18 @@ public class CategoryEntity {
     
     
 
-    public CategoryEntity(String categoryId, String name, String description) {
+    public CategoryEntity(int categoryId, String name, String description) {
         this.categoryId = categoryId;
         this.name = name;
         this.description = description;
     }
     
 
-    public String getCategoryId() {
+    public int getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(String categoryId) {
+    public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
 
