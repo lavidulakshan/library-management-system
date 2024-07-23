@@ -12,6 +12,7 @@ import librarymanagementsystem.controller.newpackage.BookController;
 import librarymanagementsystem.controller.newpackage.CategoryController;
 import librarymanagementsystem.controller.newpackage.UserController;
 import librarymanagementsystem.dto.CategoryDto;
+import librarymanagementsystem.dto.UserDto;
 import librarymanagementsystem.dto.bookDto;
 import librarymanagementsystem.entity.CategoryEntity;
 
@@ -20,8 +21,8 @@ import librarymanagementsystem.entity.CategoryEntity;
  * @author lavidulakshan
  */
 public class bookRegistration extends javax.swing.JFrame {
-    
-     private List<CategoryDto> categoryDtos = new ArrayList<>();
+
+    private List<CategoryDto> categoryDtos = new ArrayList<>();
 
     private CategoryController categoryController;
     private BookController bookController;
@@ -421,6 +422,19 @@ public class bookRegistration extends javax.swing.JFrame {
 
         };
         jTable1.setModel(dtm);
+        try {
+            ArrayList<bookDto> bDtos = bookController.getAll();
+
+            for (bookDto bDto : bDtos) {
+
+                Object[] rowData = {bDto.getTitle(), bDto.getAuthor(), bDto.getAuthor(),bDto.getDate()};
+                dtm.addRow(rowData);
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 

@@ -9,9 +9,11 @@ import librarymanagementsystem.dao.DaoFactory;
 import librarymanagementsystem.dao.custom.BookDao;
 import librarymanagementsystem.dao.custom.CategoryDao;
 import librarymanagementsystem.dto.CategoryDto;
+import librarymanagementsystem.dto.UserDto;
 import librarymanagementsystem.dto.bookDto;
 import librarymanagementsystem.entity.BookEntity;
 import librarymanagementsystem.entity.CategoryEntity;
+import librarymanagementsystem.entity.UserEntity;
 import librarymanagementsystem.service.custom.BookService;
 
 /**
@@ -45,7 +47,15 @@ public class BokkServiceImpl implements BookService {
 
     @Override
     public ArrayList<bookDto> getAll() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<bookDto> bookdtos = new ArrayList<>();
+        ArrayList<BookEntity> BookEntitys = BookDao.getAll();
+        for (BookEntity BookEntity1 : BookEntitys) {
+              bookDto bDto = getBookDto(BookEntity1);
+            
+            bookdtos.add(bDto);
+            
+        }
+        return bookdtos;
     }
 
     @Override
@@ -57,6 +67,13 @@ public class BokkServiceImpl implements BookService {
         BookEntity bookEntity = new BookEntity(dto.getTitle(), dto.getAuthor(), dto.getCategory(), dto.getDate());
 
         return bookEntity;
+    }
+    
+      private bookDto getBookDto(BookEntity entity) {
+       bookDto bDto = new bookDto(entity.getTitle(), entity.getAuthor(), entity.getCategory(), entity.getDate());
+//          System.out.println(entity.getUsername());
+//          System.out.println(entity.getPassword());
+        return bDto;
     }
 
 }

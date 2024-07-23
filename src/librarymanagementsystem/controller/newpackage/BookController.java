@@ -4,6 +4,7 @@
  */
 package librarymanagementsystem.controller.newpackage;
 
+import java.util.ArrayList;
 import librarymanagementsystem.dto.UserDto;
 import librarymanagementsystem.dto.bookDto;
 import librarymanagementsystem.service.ServiceFactory;
@@ -22,6 +23,12 @@ public class BookController {
 
         return BookService.save(bookDto);
 
+    }
+    
+    public ArrayList<bookDto> getAll()throws Exception{
+    
+//    return null;
+    return BookService.getAll();
     }
 
 }

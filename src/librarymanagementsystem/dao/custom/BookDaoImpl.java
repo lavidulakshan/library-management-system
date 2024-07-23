@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import librarymanagementsystem.dao.CrudUtil;
 import librarymanagementsystem.entity.BookEntity;
+import librarymanagementsystem.entity.UserEntity;
 
 /**
  *
@@ -65,7 +66,14 @@ public class BookDaoImpl implements BookDao {
 
     @Override
     public ArrayList<BookEntity> getAll() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<BookEntity> bookEntitys = new ArrayList<>();
+        ResultSet rst = CrudUtil.executeQuery("SELECT * FROM book");
+        while (rst.next()) {
+            BookEntity bookEntity = new BookEntity(rst.getString("book_id"), rst.getString("title"), rst.getString("author"), rst.getString("published_year"));
+            bookEntitys.add(bookEntity);
+        }
+
+        return bookEntitys;
     }
 
     @Override
