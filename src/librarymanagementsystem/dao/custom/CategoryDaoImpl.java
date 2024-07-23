@@ -42,23 +42,25 @@ public class CategoryDaoImpl implements CategoryDao {
     @Override
     public ArrayList<CategoryEntity> getAll() throws Exception {
         ResultSet rs = CrudUtil.executeQuery("select category_id,name,description from Category");
-        ArrayList<CategoryEntity> list= new ArrayList<>();
+        ArrayList<CategoryEntity> list = new ArrayList<>();
         while (rs.next()) {
             CategoryEntity categoryEntity = new CategoryEntity();
             categoryEntity.setDescription(rs.getString("description"));
             categoryEntity.setCategoryId(rs.getInt("category_id"));
             categoryEntity.setName(rs.getString("name"));
-            
+
             list.add(categoryEntity);
-            
+
         }
-        
+
         return list;
     }
 
     @Override
     public String getCustomer(CategoryEntity t) throws Exception {
-        return null;
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+   
 
 }

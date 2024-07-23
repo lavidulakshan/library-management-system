@@ -1,38 +1,36 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package librarymanagementsystem.entity;
 
-package librarymanagementsystem.dto;
-
-import java.util.List;
-
-public class bookDto {
-    
+public class BookEntity {
 
     private String title;
     private String author;
     private String Category;
     private String Date;
-    
-     private List<bookDto> bookDtos;
 
-    public bookDto() {
-        
-    }
+    public int CategoryId;
 
-    public bookDto(String title, String author, String Category, String Date, List<bookDto> bookDtos) {
+    public BookEntity(String title, String author, String Category, String Date) {
         this.title = title;
         this.author = author;
         this.Category = Category;
         this.Date = Date;
-        this.bookDtos = bookDtos;
+//        this.CategoryId = CategoryId;
     }
-    
-    
 
-    public bookDto(String title, String author, String Category, String Date) {
-        this.title = title;
-        this.author = author;
-        this.Category = Category;
-        this.Date = Date;
+    public BookEntity() {
     }
+
+//    public int getCategoryId() {
+//        return CategoryId;
+//    }
+//
+//    public void setCategoryId(int CategoryId) {
+//        this.CategoryId = CategoryId;
+//    }
 
     public String getTitle() {
         return title;
@@ -68,18 +66,9 @@ public class bookDto {
 
     @Override
     public String toString() {
-        return "bookDto{" + "title=" + title + ", author=" + author + ", Category=" + Category + ", Date=" + Date + '}';
+        return "BookEntity{" + "title=" + title + ", author=" + author + ", Category=" + Category + ", Date=" + Date + ", CategoryId=" + CategoryId + '}';
     }
-    
-    
-    
-    
-    
 
    
-    
-    
-    
-    
-    
+
 }

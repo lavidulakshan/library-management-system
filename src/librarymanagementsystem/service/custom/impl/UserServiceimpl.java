@@ -71,12 +71,12 @@ public class UserServiceimpl implements UserServise {
     }
     
       private UserDto getItemDto(UserEntity entity) {
-        UserDto itemDto = new UserDto(entity.getUsername(),
+        UserDto userDto = new UserDto(entity.getUsername(),
                 entity.getPassword(),
                 entity.getContactNumber());
 //          System.out.println(entity.getUsername());
 //          System.out.println(entity.getPassword());
-        return itemDto;
+        return userDto;
     }
 
 }

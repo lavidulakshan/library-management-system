@@ -472,6 +472,7 @@ public void userSave() {
 //                this.dispose();
 //                    System.exit(0);
                 loadTable();
+                clearForm();
             } else {
                 clearForm();
 

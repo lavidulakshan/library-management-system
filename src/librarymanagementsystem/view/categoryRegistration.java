@@ -1,9 +1,12 @@
 package librarymanagementsystem.view;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import librarymanagementsystem.controller.newpackage.CategoryController;
 import librarymanagementsystem.dto.CategoryDto;
+import librarymanagementsystem.entity.CategoryEntity;
 
 public class categoryRegistration extends javax.swing.JFrame {
 
@@ -195,6 +198,7 @@ public class categoryRegistration extends javax.swing.JFrame {
 
             if (res.equals("Success")) {
                 JOptionPane.showMessageDialog(this, "Category Added Successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                loadTable();
                 clearForm();
             } else {
                 JOptionPane.showMessageDialog(this, "Failed to add category. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -212,12 +216,34 @@ public class categoryRegistration extends javax.swing.JFrame {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
-
             }
-
         };
         jTable1.setModel(dtm);
 
+        try {
+            List<CategoryEntity> categoryEntityList = this.categoryController.getDropDownData();
+            List<CategoryDto> categoryDtos = new ArrayList<>();
+            for (CategoryEntity categoryEntity : categoryEntityList) {
+                CategoryDto categoryDto = new CategoryDto();
+                categoryDto.setDescription(categoryEntity.getDescription());
+                categoryDto.setId(categoryEntity.getCategoryId());
+                categoryDto.setName(categoryEntity.getName());
+
+                categoryDtos.add(categoryDto);
+            }
+
+            for (CategoryDto categoryDto : categoryDtos) {
+                Object[] rowData = {
+                    categoryDto.getId(),
+                    categoryDto.getName(),
+                    categoryDto.getDescription()
+                };
+                dtm.addRow(rowData);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void clearForm() {

@@ -1,6 +1,7 @@
 
 package librarymanagementsystem.dao;
 
+import librarymanagementsystem.dao.custom.BookDaoImpl;
 import librarymanagementsystem.dao.custom.CategoryDaoImpl;
 import librarymanagementsystem.dao.custom.UserDaoImpl;
 
@@ -24,13 +25,16 @@ public class DaoFactory {
                 return new UserDaoImpl();
                   case CATEGORY:
                 return new CategoryDaoImpl();
+                
+                 case BOOK:
+                return new BookDaoImpl();
             default:
                 return null;
         }
     }
 
     public enum DaoTypes {
-        USER, CATEGORY, ORDER, ORDER_DETAIL
+        USER, CATEGORY, BOOK, ORDER_DETAIL
     }
     
 }
