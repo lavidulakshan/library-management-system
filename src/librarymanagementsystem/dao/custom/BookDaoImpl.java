@@ -19,7 +19,7 @@ public class BookDaoImpl implements BookDao {
 
     private boolean isCategoryIdExists(int categoryId) {
         try {
-            ResultSet rs = CrudUtil.executeQuery("SELECT COUNT(*) FROM category WHERE category_id = ?", categoryId);
+            ResultSet rs = CrudUtil.executeQuery("SELECT * FROM category WHERE category_id = ?", categoryId);
             if (rs.next()) {
                 return rs.getInt(1) > 0;
             }
@@ -43,8 +43,8 @@ public class BookDaoImpl implements BookDao {
         }
 
         boolean isSaved = CrudUtil.executeUpdate(
-                "INSERT INTO book (title, author, published_year, category_id) VALUES(?, ?, ?, ?)",
-                entity.getTitle(), entity.getAuthor(), entity.getDate(), categoryId);
+                "INSERT INTO book (title, author, published_year, category_id , quantity) VALUES(?, ?, ?, ?,?)",
+                entity.getTitle(), entity.getAuthor(), entity.getDate(), entity.getQuantity(),categoryId);
         return isSaved ? "Success" : "Fail";
 
     }
@@ -69,7 +69,7 @@ public class BookDaoImpl implements BookDao {
         ArrayList<BookEntity> bookEntitys = new ArrayList<>();
         ResultSet rst = CrudUtil.executeQuery("SELECT * FROM book");
         while (rst.next()) {
-            BookEntity bookEntity = new BookEntity(rst.getString("book_id"), rst.getString("title"), rst.getString("author"), rst.getString("published_year"));
+            BookEntity bookEntity = new BookEntity(rst.getString("book_id"), rst.getString("title"), rst.getString("author"),rst.getString("quantity"),rst.getString("published_year"));
             bookEntitys.add(bookEntity);
         }
 

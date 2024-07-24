@@ -13,16 +13,23 @@ public class BookEntity {
 
     public int CategoryId;
 
-    public BookEntity(String title, String author, String Category, String Date) {
+    private String quantity;
+
+    public BookEntity(String title, String author, String Category, String Date, String quantity) {
         this.title = title;
         this.author = author;
         this.Category = Category;
         this.Date = Date;
-//        this.CategoryId = CategoryId;
+        this.CategoryId = CategoryId;
+        this.quantity = quantity;
     }
 
     public BookEntity() {
     }
+
+    
+
+   
 
 //    public int getCategoryId() {
 //        return CategoryId;
@@ -31,6 +38,23 @@ public class BookEntity {
 //    public void setCategoryId(int CategoryId) {
 //        this.CategoryId = CategoryId;
 //    }
+    public int getCategoryId() {
+        return CategoryId;
+    }
+
+    public void setCategoryId(int CategoryId) {
+        this.CategoryId = CategoryId;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
+
+  
 
     public String getTitle() {
         return title;
@@ -66,9 +90,7 @@ public class BookEntity {
 
     @Override
     public String toString() {
-        return "BookEntity{" + "title=" + title + ", author=" + author + ", Category=" + Category + ", Date=" + Date + ", CategoryId=" + CategoryId + '}';
+        return "BookEntity{" + "title=" + title + ", author=" + author + ", Category=" + Category + ", Date=" + Date + ", CategoryId=" + CategoryId + ", quantity=" + quantity + '}';
     }
-
-   
 
 }

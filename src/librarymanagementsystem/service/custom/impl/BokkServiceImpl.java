@@ -45,7 +45,7 @@ public class BokkServiceImpl implements BookService {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
+        @Override
     public ArrayList<bookDto> getAll() throws Exception {
         ArrayList<bookDto> bookdtos = new ArrayList<>();
         ArrayList<BookEntity> BookEntitys = BookDao.getAll();
@@ -64,13 +64,16 @@ public class BokkServiceImpl implements BookService {
     }
 
     private BookEntity getBookEntity(bookDto dto) {
-        BookEntity bookEntity = new BookEntity(dto.getTitle(), dto.getAuthor(), dto.getCategory(), dto.getDate());
+//        BookEntity bookEntity = new BookEntity(dto.getTitle(), dto.getAuthor(), dto.getCategory(), dto.getDate(),dto.getQuantity());
+        
+        BookEntity bookEntity = new BookEntity(dto.getTitle(), dto.getAuthor(), dto.getCategory(), dto.getDate(), dto.getQuantity());
+        System.out.println(dto.getQuantity());
 
         return bookEntity;
     }
     
       private bookDto getBookDto(BookEntity entity) {
-       bookDto bDto = new bookDto(entity.getTitle(), entity.getAuthor(), entity.getCategory(), entity.getDate());
+       bookDto bDto = new bookDto(entity.getTitle(), entity.getAuthor(), entity.getCategory(), entity.getDate(),entity.getQuantity());
 //          System.out.println(entity.getUsername());
 //          System.out.println(entity.getPassword());
         return bDto;

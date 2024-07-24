@@ -1,38 +1,50 @@
-
 package librarymanagementsystem.dto;
 
 import java.util.List;
 
 public class bookDto {
-    
 
     private String title;
     private String author;
     private String Category;
     private String Date;
-    
-     private List<bookDto> bookDtos;
+    private String quantity;
+
+//    private List<bookDto> bookDtos;
 
     public bookDto() {
-        
+
     }
 
-    public bookDto(String title, String author, String Category, String Date, List<bookDto> bookDtos) {
+//    public bookDto(String title, String author, String Category, String Date, List<bookDto> bookDtos) {
+//        this.title = title;
+//        this.author = author;
+//        this.Category = Category;
+//        this.Date = Date;
+//        this.bookDtos = bookDtos;
+//    }
+
+    public bookDto(String title, String author, String Category, String Date, String quantity) {
         this.title = title;
         this.author = author;
         this.Category = Category;
         this.Date = Date;
-        this.bookDtos = bookDtos;
+        this.quantity = quantity;
     }
-    
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
+
+   
+
+   
     
 
-    public bookDto(String title, String author, String Category, String Date) {
-        this.title = title;
-        this.author = author;
-        this.Category = Category;
-        this.Date = Date;
-    }
 
     public String getTitle() {
         return title;
@@ -68,18 +80,8 @@ public class bookDto {
 
     @Override
     public String toString() {
-        return "bookDto{" + "title=" + title + ", author=" + author + ", Category=" + Category + ", Date=" + Date + '}';
+        return "bookDto{" + "title=" + title + ", author=" + author + ", Category=" + Category + ", Date=" + Date + ", quantity=" + quantity + '}';
     }
-    
-    
-    
-    
-    
 
-   
-    
-    
-    
-    
-    
+
 }
