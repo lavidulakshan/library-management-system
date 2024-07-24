@@ -7,6 +7,7 @@ package librarymanagementsystem.view;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import librarymanagementsystem.controller.newpackage.BookController;
 import librarymanagementsystem.controller.newpackage.CategoryController;
@@ -445,7 +446,7 @@ public class bookRegistration extends javax.swing.JFrame {
 
     public void loadTable() {
 
-        String[] columns = {"ID", "Titele", "Author", "Published Year","QTY"};
+        String[] columns = {"ID", "Titele", "Author", "Published Year", "QTY"};
 
         DefaultTableModel dtm = new DefaultTableModel(columns, 0) {
             @Override
@@ -461,7 +462,7 @@ public class bookRegistration extends javax.swing.JFrame {
 
             for (bookDto bDto : bDtos) {
 
-                Object[] rowData = {bDto.getTitle(), bDto.getAuthor(), bDto.getAuthor(),bDto.getQuantity(),bDto.getDate()};
+                Object[] rowData = {bDto.getTitle(), bDto.getAuthor(), bDto.getAuthor(), bDto.getQuantity(), bDto.getDate()};
                 dtm.addRow(rowData);
 
             }
@@ -475,20 +476,61 @@ public class bookRegistration extends javax.swing.JFrame {
     public void UserSave() {
 
         try {
-
             String title = jTextField1.getText();
             String selectedId = String.valueOf(list.get(comboCategory.getSelectedIndex()).getId());
             String date = jTextField3.getText();
             String author = jTextField5.getText();
-           String qty =  jTextField6.getText();
-            System.out.println(qty);
-            bookDto bookDto = new bookDto(title, author, selectedId, date,qty);
+            String qty = jTextField6.getText();
+
+            // Validate title
+            if (title == null || title.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Title is required", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Validate selectedId
+            if (selectedId == null || selectedId.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Category is required", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Validate date
+            if (date == null || date.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Date is required", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Validate author
+            if (author == null || author.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Author is required", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Validate quantity
+            if (qty == null || qty.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Quantity is required", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            try {
+                int quantity = Integer.parseInt(qty);
+                if (quantity <= 0) {
+                    JOptionPane.showMessageDialog(null, "Quantity must be a positive number", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Quantity must be a number", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            bookDto bookDto = new bookDto(title, author, selectedId, date, qty);
             String res = bookController.save(bookDto);
+            JOptionPane.showMessageDialog(null, res, "Save Result", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (Exception e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "An error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-
     }
 
 }

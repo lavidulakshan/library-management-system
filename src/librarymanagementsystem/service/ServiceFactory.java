@@ -2,6 +2,7 @@ package librarymanagementsystem.service;
 
 import librarymanagementsystem.service.custom.impl.BokkServiceImpl;
 import librarymanagementsystem.service.custom.impl.CategoryserviceImpl;
+import librarymanagementsystem.service.custom.impl.MemberServiceImpl;
 import librarymanagementsystem.service.custom.impl.UserServiceimpl;
 
 public class ServiceFactory {
@@ -28,6 +29,9 @@ public class ServiceFactory {
 
             case BOOK:
                 return new BokkServiceImpl();
+                
+                case MEMBER:
+                return new MemberServiceImpl();
 
             default:
                 return null;
@@ -35,7 +39,7 @@ public class ServiceFactory {
     }
 
     public enum ServiceType {
-        USER, CATEGORY, BOOK
+        USER, CATEGORY, BOOK ,MEMBER
     }
 
 }
