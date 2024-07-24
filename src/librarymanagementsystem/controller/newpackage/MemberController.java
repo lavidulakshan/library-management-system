@@ -4,8 +4,10 @@
  */
 package librarymanagementsystem.controller.newpackage;
 
+import java.util.ArrayList;
 import librarymanagementsystem.dto.CategoryDto;
 import librarymanagementsystem.dto.MemberDto;
+import librarymanagementsystem.dto.UserDto;
 import librarymanagementsystem.service.ServiceFactory;
 import librarymanagementsystem.service.custom.MemberService;
 
@@ -17,6 +19,12 @@ public class MemberController {
 
         return memberService.save(memberDto);
 
+    }
+    
+    public ArrayList<MemberDto> getAll()throws Exception{
+    
+    
+    return memberService.getAll();
     }
 
 }

@@ -4,10 +4,12 @@
  */
 package librarymanagementsystem.dao.custom;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import librarymanagementsystem.dao.CrudUtil;
 import librarymanagementsystem.dao.MemberDao;
 import librarymanagementsystem.entity.MemberEntity;
+import librarymanagementsystem.entity.UserEntity;
 
 /**
  *
@@ -18,8 +20,8 @@ public class MemberDaoImpl implements MemberDao {
     @Override
     public String save(MemberEntity entity) throws Exception {
 
-       boolean isSaved = CrudUtil.executeUpdate("INSERT INTO member (name,address,phone,email) VALUES(?,?,?,?)",
-                entity.getName(), entity.getAddress(),entity.getPhone(),entity.getAddress());
+        boolean isSaved = CrudUtil.executeUpdate("INSERT INTO member (name,address,phone,email) VALUES(?,?,?,?)",
+                entity.getName(), entity.getAddress(), entity.getPhone(), entity.getAddress());
         return isSaved ? "Success" : "Fail";
     }
 
@@ -40,7 +42,15 @@ public class MemberDaoImpl implements MemberDao {
 
     @Override
     public ArrayList<MemberEntity> getAll() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<MemberEntity> memberEntitys = new ArrayList<>();
+        ResultSet rst = CrudUtil.executeQuery("SELECT * FROM member");
+        while (rst.next()) {
+            MemberEntity memberEntity = new MemberEntity(rst.getString("name"), rst.getString("address"), rst.getString("phone"), rst.getString("email"));
+            memberEntitys.add(memberEntity);
+        }
+
+        return memberEntitys;
+
     }
 
     @Override

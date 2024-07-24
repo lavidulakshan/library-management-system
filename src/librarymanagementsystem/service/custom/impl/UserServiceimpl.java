@@ -74,8 +74,6 @@ public class UserServiceimpl implements UserServise {
         UserDto userDto = new UserDto(entity.getUsername(),
                 entity.getPassword(),
                 entity.getContactNumber());
-//          System.out.println(entity.getUsername());
-//          System.out.println(entity.getPassword());
         return userDto;
     }
 

@@ -4,10 +4,13 @@
  */
 package librarymanagementsystem.view;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import librarymanagementsystem.controller.newpackage.BookController;
 import librarymanagementsystem.controller.newpackage.MemberController;
 import librarymanagementsystem.dto.MemberDto;
+import librarymanagementsystem.dto.UserDto;
 import librarymanagementsystem.dto.bookDto;
 
 /**
@@ -25,6 +28,7 @@ public class MemberRegistration extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.memberController = new MemberController();
+        loadTable();
     }
 
     /**
@@ -311,6 +315,35 @@ public class MemberRegistration extends javax.swing.JFrame {
 
             e.printStackTrace();
         }
+    }
+
+    public void loadTable() {
+
+        String coloumns[] = {"ID", "Name", "Address", "Phone", "Email"};
+
+        DefaultTableModel dtm = new DefaultTableModel(coloumns, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+
+        };
+
+        jTable1.setModel(dtm);
+
+        try {
+
+            ArrayList<MemberDto> memberDtos = memberController.getAll();
+            for (MemberDto memberDto : memberDtos) {
+                Object[] rowData = {memberDto.getName(), memberDto.getAddress(), memberDto.getPhone(), memberDto.getEmail()};
+                dtm.addRow(rowData);
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

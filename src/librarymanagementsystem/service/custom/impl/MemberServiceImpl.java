@@ -10,6 +10,7 @@ import librarymanagementsystem.dao.MemberDao;
 import librarymanagementsystem.dto.MemberDto;
 import librarymanagementsystem.dto.UserDto;
 import librarymanagementsystem.entity.MemberEntity;
+import librarymanagementsystem.entity.UserEntity;
 import librarymanagementsystem.service.custom.MemberService;
 
 /**
@@ -45,7 +46,15 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public ArrayList<MemberDto> getAll() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<MemberDto> memberDtos = new ArrayList<>();
+        ArrayList<MemberEntity> userEntitys = memberDao.getAll();
+        for (MemberEntity memberEntity : userEntitys) {
+             MemberDto dto = getMemberDto(memberEntity);
+            memberDtos.add(dto);
+            
+        }
+        return memberDtos;
+
     }
 
     public MemberEntity getMemberEntity(MemberDto memberDto) {
@@ -54,6 +63,13 @@ public class MemberServiceImpl implements MemberService {
 
         return memberEntity;
 
+    }
+
+    private MemberDto getMemberDto(MemberEntity memberEntity) {
+        MemberDto memberDto = new MemberDto(memberEntity.getName(), memberEntity.getAddress(), memberEntity.getPhone(), memberEntity.getEmail());
+        
+//        System.out.println(memberEntity.getName());
+        return memberDto;
     }
 
 }
