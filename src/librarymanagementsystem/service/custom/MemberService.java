@@ -20,7 +20,7 @@ public interface MemberService extends SuperService{
 
     public String update(MemberDto memberDto) throws Exception;
 
-    public String delete(MemberDto memberDto) throws Exception;
+    public String delete(String  id) throws Exception;
 
     public UserDto get(MemberDto memberDto) throws Exception;
 

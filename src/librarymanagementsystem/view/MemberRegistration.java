@@ -186,6 +186,11 @@ public class MemberRegistration extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -238,7 +243,7 @@ public class MemberRegistration extends javax.swing.JFrame {
     }//GEN-LAST:event_emailActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+        deleteMember();
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -246,6 +251,17 @@ public class MemberRegistration extends javax.swing.JFrame {
         MemberSave();
 
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        int row = jTable1.getSelectedRow();
+
+        name.setText(String.valueOf(jTable1.getValueAt(row, 1)));
+        address.setText(String.valueOf(jTable1.getValueAt(row, 2)));
+        phone.setText(String.valueOf(jTable1.getValueAt(row, 3)));
+        email.setText(String.valueOf(jTable1.getValueAt(row, 4)));
+
+
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -335,7 +351,7 @@ public class MemberRegistration extends javax.swing.JFrame {
 
             ArrayList<MemberDto> memberDtos = memberController.getAll();
             for (MemberDto memberDto : memberDtos) {
-                Object[] rowData = {memberDto.getName(), memberDto.getAddress(), memberDto.getPhone(), memberDto.getEmail()};
+                Object[] rowData = {memberDto.getId(),memberDto.getName(), memberDto.getAddress(), memberDto.getPhone(), memberDto.getEmail()};
                 dtm.addRow(rowData);
 
             }
@@ -343,6 +359,44 @@ public class MemberRegistration extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+    }
+
+
+
+public void deleteMember() {
+    try {
+        int row = jTable1.getSelectedRow();
+
+        if (row == -1) {
+            JOptionPane.showMessageDialog(null, "Please select a row to delete", "Validation Error", JOptionPane.WARNING_MESSAGE);
+        } else {
+            String id = jTable1.getValueAt(row, 0).toString();
+            System.out.println(id);
+
+            memberController.delete(id);
+            ((DefaultTableModel) jTable1.getModel()).removeRow(row);
+
+            JOptionPane.showMessageDialog(null, "Member deleted successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+            // After deleting, you may want to reset the fields or handle post-deletion actions
+            name.setText("");
+            address.setText("");
+            phone.setText("");
+            email.setText("");
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(null, "An error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+
+    public void clearForm() {
+        name.setText("");
+        address.setText("");
+        phone.setText("");
+        email.setText("");
 
     }
 

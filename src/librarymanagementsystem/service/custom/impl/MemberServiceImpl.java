@@ -35,8 +35,9 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public String delete(MemberDto memberDto) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public String delete(String id ) throws Exception {
+        
+        return memberDao.delete(id);
     }
 
     @Override
@@ -47,8 +48,8 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public ArrayList<MemberDto> getAll() throws Exception {
         ArrayList<MemberDto> memberDtos = new ArrayList<>();
-        ArrayList<MemberEntity> userEntitys = memberDao.getAll();
-        for (MemberEntity memberEntity : userEntitys) {
+        ArrayList<MemberEntity> memberEntitys = memberDao.getAll();
+        for (MemberEntity memberEntity : memberEntitys) {
              MemberDto dto = getMemberDto(memberEntity);
             memberDtos.add(dto);
             
@@ -66,7 +67,9 @@ public class MemberServiceImpl implements MemberService {
     }
 
     private MemberDto getMemberDto(MemberEntity memberEntity) {
-        MemberDto memberDto = new MemberDto(memberEntity.getName(), memberEntity.getAddress(), memberEntity.getPhone(), memberEntity.getEmail());
+//        MemberDto memberDto = new MemberDto(memberEntity.getName(), memberEntity.getAddress(), memberEntity.getPhone(), memberEntity.getPhone());
+
+MemberDto memberDto = new MemberDto(memberEntity.getName(), memberEntity.getAddress(), memberEntity.getPhone(), memberEntity.getPhone(), memberEntity.getMemberID());
         
 //        System.out.println(memberEntity.getName());
         return memberDto;

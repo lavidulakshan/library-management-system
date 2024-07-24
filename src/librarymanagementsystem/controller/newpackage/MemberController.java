@@ -26,5 +26,11 @@ public class MemberController {
     
     return memberService.getAll();
     }
+    
+    public String delete(String id) throws Exception{
+        
+        return memberService.delete(id);
+    
+    }
 
 }

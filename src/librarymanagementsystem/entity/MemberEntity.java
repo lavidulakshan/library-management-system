@@ -7,6 +7,19 @@ public class MemberEntity {
     private String address;
     private String phone;
     private String email;
+    
+ 
+
+    public MemberEntity(int memberID, String name, String address, String phone, String email) {
+        this.memberID = memberID;
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+        
+    }
+    
+    
 
     public MemberEntity() {
     }
@@ -17,6 +30,16 @@ public class MemberEntity {
         this.phone = phone;
         this.email = email;
     }
+
+    public int getMemberID() {
+        return memberID;
+    }
+
+    public void setMemberID(int memberID) {
+        this.memberID = memberID;
+    }
+    
+    
 
     public String getName() {
         return name;

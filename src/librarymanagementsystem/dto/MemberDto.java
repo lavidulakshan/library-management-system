@@ -6,8 +6,26 @@ public class MemberDto {
     private String address;
     private String phone;
     private String email;
+    
+    private int id;
 
     public MemberDto() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public MemberDto(String name, String address, String phone, String email, int id) {
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+        this.id = id;
     }
 
     public MemberDto(String name, String address, String phone, String email) {
@@ -16,6 +34,9 @@ public class MemberDto {
         this.phone = phone;
         this.email = email;
     }
+    
+
+  
 
     public String getName() {
         return name;

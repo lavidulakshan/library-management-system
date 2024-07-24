@@ -32,7 +32,10 @@ public class MemberDaoImpl implements MemberDao {
 
     @Override
     public String delete(String id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        boolean isDeleted = CrudUtil.executeUpdate("DELETE FROM  Member WHERE member_id =?", id);
+        return isDeleted ? "success" : "fail";
+
     }
 
     @Override
@@ -45,7 +48,9 @@ public class MemberDaoImpl implements MemberDao {
         ArrayList<MemberEntity> memberEntitys = new ArrayList<>();
         ResultSet rst = CrudUtil.executeQuery("SELECT * FROM member");
         while (rst.next()) {
-            MemberEntity memberEntity = new MemberEntity(rst.getString("name"), rst.getString("address"), rst.getString("phone"), rst.getString("email"));
+            MemberEntity memberEntity = new MemberEntity(Integer.parseInt(rst.getString("member_id")), rst.getString("name"), rst.getString("address"), rst.getString("phone"), rst.getString("email"));
+
+            System.out.println(rst.getString("member_id"));
             memberEntitys.add(memberEntity);
         }
 
