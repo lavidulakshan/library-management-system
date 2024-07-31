@@ -30,5 +30,10 @@ public class BookController {
 //    return null;
     return BookService.getAll();
     }
+    
+    
+          public String updateBook(bookDto bDto) throws Exception {
+                    return BookService.update(bDto);
+          }
 
 }

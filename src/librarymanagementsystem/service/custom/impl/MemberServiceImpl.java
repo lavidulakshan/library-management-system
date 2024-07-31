@@ -35,8 +35,8 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public String delete(String id ) throws Exception {
-        
+    public String delete(String id) throws Exception {
+
         return memberDao.delete(id);
     }
 
@@ -50,9 +50,9 @@ public class MemberServiceImpl implements MemberService {
         ArrayList<MemberDto> memberDtos = new ArrayList<>();
         ArrayList<MemberEntity> memberEntitys = memberDao.getAll();
         for (MemberEntity memberEntity : memberEntitys) {
-             MemberDto dto = getMemberDto(memberEntity);
+            MemberDto dto = getMemberDto(memberEntity);
             memberDtos.add(dto);
-            
+
         }
         return memberDtos;
 
@@ -69,8 +69,8 @@ public class MemberServiceImpl implements MemberService {
     private MemberDto getMemberDto(MemberEntity memberEntity) {
 //        MemberDto memberDto = new MemberDto(memberEntity.getName(), memberEntity.getAddress(), memberEntity.getPhone(), memberEntity.getPhone());
 
-MemberDto memberDto = new MemberDto(memberEntity.getName(), memberEntity.getAddress(), memberEntity.getPhone(), memberEntity.getPhone(), memberEntity.getMemberID());
-        
+        MemberDto memberDto = new MemberDto(memberEntity.getName(), memberEntity.getAddress(), memberEntity.getPhone(), memberEntity.getPhone(), memberEntity.getMemberID());
+
 //        System.out.println(memberEntity.getName());
         return memberDto;
     }

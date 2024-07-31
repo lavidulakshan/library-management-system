@@ -27,7 +27,8 @@ public class MemberDaoImpl implements MemberDao {
 
     @Override
     public String update(MemberEntity t) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        return null;
     }
 
     @Override
@@ -50,7 +51,7 @@ public class MemberDaoImpl implements MemberDao {
         while (rst.next()) {
             MemberEntity memberEntity = new MemberEntity(Integer.parseInt(rst.getString("member_id")), rst.getString("name"), rst.getString("address"), rst.getString("phone"), rst.getString("email"));
 
-            System.out.println(rst.getString("member_id"));
+//            System.out.println(rst.getString("member_id"));
             memberEntitys.add(memberEntity);
         }
 

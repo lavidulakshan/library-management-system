@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import librarymanagementsystem.controller.newpackage.BookController;
 import librarymanagementsystem.controller.newpackage.CategoryController;
@@ -21,7 +22,7 @@ import librarymanagementsystem.entity.CategoryEntity;
  *
  * @author lavidulakshan
  */
-public class bookRegistration extends javax.swing.JFrame {
+public class bookRegistration extends javax.swing.JDialog {
 
     private List<CategoryDto> categoryDtos = new ArrayList<>();
 
@@ -29,10 +30,17 @@ public class bookRegistration extends javax.swing.JFrame {
     private BookController bookController;
     List<CategoryDto> list;
 
+    private TranSaction tranSaction;
+
+    public void setTranSaction(TranSaction tranSaction) {
+        this.tranSaction = tranSaction;
+    }
+
     /**
      * Creates new form bookRegistration
      */
-    public bookRegistration() {
+    public bookRegistration(java.awt.Dialog parent, boolean modal) {
+        super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
         this.categoryController = new CategoryController();
@@ -46,6 +54,24 @@ public class bookRegistration extends javax.swing.JFrame {
         for (CategoryDto itemList : list) {
             comboCategory.addItem(itemList.getName());
         }
+    }
+
+    bookRegistration() {
+
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.categoryController = new CategoryController();
+
+        this.bookController = new BookController();
+        loadTable();
+
+        list = getDropDownData();
+
+        DefaultComboBoxModel<CategoryDto> comboBoxModel = new DefaultComboBoxModel<>();
+        for (CategoryDto itemList : list) {
+            comboCategory.addItem(itemList.getName());
+        }
+
     }
 
     /**
@@ -63,10 +89,8 @@ public class bookRegistration extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         comboCategory = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jTextField5 = new javax.swing.JTextField();
@@ -76,7 +100,7 @@ public class bookRegistration extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/librarymanagementsystem/img/add-item.png"))); // NOI18N
@@ -114,11 +138,13 @@ public class bookRegistration extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel5.setText("Published Year");
-
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton1.setText("Add");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -141,13 +167,6 @@ public class bookRegistration extends javax.swing.JFrame {
             }
         });
 
-        jTextField3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextField3KeyReleased(evt);
-            }
-        });
-
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -159,6 +178,11 @@ public class bookRegistration extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jTextField5.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -208,13 +232,10 @@ public class bookRegistration extends javax.swing.JFrame {
                                         .addGap(83, 83, 83)
                                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel5)
-                                            .addComponent(jLabel7))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel7)
+                                        .addGap(68, 68, 68)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(0, 13, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -244,11 +265,7 @@ public class bookRegistration extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addComponent(comboCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(54, 54, 54)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
@@ -318,7 +335,7 @@ public class bookRegistration extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        UserSave();
+//        UserSave();
 
 //        System.out.println("Id :" + selectedId);//        list.get(comboCategory.getSelectedIndex().getId);
 
@@ -335,10 +352,6 @@ public class bookRegistration extends javax.swing.JFrame {
     private void jLabel6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseExited
 
     }//GEN-LAST:event_jLabel6MouseExited
-
-    private void jTextField3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyReleased
-
-    }//GEN-LAST:event_jTextField3KeyReleased
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
@@ -368,6 +381,31 @@ public class bookRegistration extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField6KeyReleased
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        int row = jTable1.getSelectedRow();
+
+        if (evt.getClickCount() == 2) {
+
+            String quantity = String.valueOf(jTable1.getValueAt(row, 2));
+
+            System.out.println(quantity);
+
+            if (tranSaction != null) {
+                tranSaction.getjTextField2().setText(String.valueOf(jTable1.getValueAt(row, 1)));
+                tranSaction.getjTextField4().setText(String.valueOf(jTable1.getValueAt(row, 0)));
+                this.dispose();
+
+            }
+        } else {
+        }
+
+
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+      UserSave();
+    }//GEN-LAST:event_jButton1MouseClicked
+
     private List<CategoryDto> getDropDownData() {
         try {
             List<CategoryEntity> categoryEntityList = this.categoryController.getDropDownData();
@@ -391,37 +429,37 @@ public class bookRegistration extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(bookRegistration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(bookRegistration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(bookRegistration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(bookRegistration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new bookRegistration().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(bookRegistration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(bookRegistration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(bookRegistration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(bookRegistration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new bookRegistration().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> comboCategory;
@@ -429,7 +467,6 @@ public class bookRegistration extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -439,14 +476,13 @@ public class bookRegistration extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
 
     public void loadTable() {
 
-        String[] columns = {"ID", "Titele", "Author", "Published Year", "QTY"};
+        String[] columns = {"ID", "Titele", "Author", "QTY"};
 
         DefaultTableModel dtm = new DefaultTableModel(columns, 0) {
             @Override
@@ -462,7 +498,7 @@ public class bookRegistration extends javax.swing.JFrame {
 
             for (bookDto bDto : bDtos) {
 
-                Object[] rowData = {bDto.getTitle(), bDto.getAuthor(), bDto.getAuthor(), bDto.getQuantity(), bDto.getDate()};
+                Object[] rowData = {bDto.getBookId(), bDto.getTitle(), bDto.getAuthor(), bDto.getQuantity()};
                 dtm.addRow(rowData);
 
             }
@@ -478,7 +514,6 @@ public class bookRegistration extends javax.swing.JFrame {
         try {
             String title = jTextField1.getText();
             String selectedId = String.valueOf(list.get(comboCategory.getSelectedIndex()).getId());
-            String date = jTextField3.getText();
             String author = jTextField5.getText();
             String qty = jTextField6.getText();
 
@@ -491,12 +526,6 @@ public class bookRegistration extends javax.swing.JFrame {
             // Validate selectedId
             if (selectedId == null || selectedId.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Category is required", "Validation Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            // Validate date
-            if (date == null || date.trim().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Date is required", "Validation Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
@@ -523,14 +552,31 @@ public class bookRegistration extends javax.swing.JFrame {
                 return;
             }
 
-            bookDto bookDto = new bookDto(title, author, selectedId, date, qty);
+            bookDto bookDto = new bookDto(title, author, selectedId, qty);
             String res = bookController.save(bookDto);
-            JOptionPane.showMessageDialog(null, res, "Save Result", JOptionPane.INFORMATION_MESSAGE);
+
+            if ("Success".equals(res)) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    public void run() {
+                        JOptionPane.showMessageDialog(null, "Book Added Successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+                        loadTable();
+                        clearForm();
+                    }
+                });
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "An error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+
+    }
+
+    public void clearForm() {
+        jTextField1.setText("");
+        comboCategory.setSelectedItem(null);
+        jTextField5.setText("");
+        jTextField6.setText("");
+
     }
 
 }

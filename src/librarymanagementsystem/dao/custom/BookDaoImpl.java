@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import librarymanagementsystem.dao.CrudUtil;
 import librarymanagementsystem.entity.BookEntity;
 import librarymanagementsystem.entity.UserEntity;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  *
@@ -17,12 +19,15 @@ import librarymanagementsystem.entity.UserEntity;
  */
 public class BookDaoImpl implements BookDao {
 
+    int categoryId;
+
     private boolean isCategoryIdExists(int categoryId) {
         try {
-            ResultSet rs = CrudUtil.executeQuery("SELECT * FROM category WHERE category_id = ?", categoryId);
-            if (rs.next()) {
-                return rs.getInt(1) > 0;
-            }
+            ResultSet rs = CrudUtil.executeQuery("SELECT category_id FROM category WHERE category_id = ?", categoryId);
+
+            // Check if the result set contains any rows
+            return rs.next(); // If there's a row, the categoryId exists
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -31,27 +36,55 @@ public class BookDaoImpl implements BookDao {
 
     @Override
     public String save(BookEntity entity) throws Exception {
-        int categoryId;
-        try {
-            categoryId = Integer.parseInt(entity.getCategory()); // Convert String to int
-        } catch (NumberFormatException e) {
-            return "Fail: Invalid category_id format";
-        }
 
-        if (!isCategoryIdExists(categoryId)) {
-            return "Fail: Invalid category_id";
-        }
+        if (entity.getCategoryId() == null || entity.getCategoryId().isEmpty()) {
+        return "Fail: Invalid category_id";
+    }
 
-        boolean isSaved = CrudUtil.executeUpdate(
-                "INSERT INTO book (title, author, published_year, category_id , quantity) VALUES(?, ?, ?, ?,?)",
-                entity.getTitle(), entity.getAuthor(), entity.getDate(), entity.getQuantity(),categoryId);
-        return isSaved ? "Success" : "Fail";
+    try {
+        categoryId = Integer.parseInt(entity.getCategoryId());
+    } catch (NumberFormatException e) {
+        e.printStackTrace();
+        return "Fail: Invalid category_id format";
+    }
+
+    if (!isCategoryIdExists(categoryId)) {
+        return "Fail: Invalid category_id";
+    }
+
+    boolean isSaved = CrudUtil.executeUpdate(
+            "INSERT INTO book (title, author, category_id, quantity) VALUES(?, ?, ?, ?)",
+            entity.getTitle(), entity.getAuthor(), categoryId, entity.getQuantity());
+    return isSaved ? "Success" : "Fail";
 
     }
 
     @Override
     public String update(BookEntity t) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            if (!isCategoryIdExists(Integer.parseInt(t.getCategoryId()))) {
+                return "Category ID does not exist.";
+            }
+
+            // Log the update query details
+            System.out.println("Updating book: " + t);
+
+            boolean isUpdated = CrudUtil.executeUpdate("UPDATE book SET author = ?, category_id = ?, quantity = ? WHERE title = ?",
+                    t.getAuthor(),
+                    t.getCategoryId(),
+                    t.getQuantity(),
+                    t.getTitle());
+
+            if (isUpdated) {
+                return "Book updated successfully.";
+            } else {
+                return "Book update failed.";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+
     }
 
     @Override
@@ -61,7 +94,24 @@ public class BookDaoImpl implements BookDao {
 
     @Override
     public BookEntity get(String id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//        System.out.println("bookId :" +id);
+
+        BookEntity bookEntity = null;
+        try {
+            ResultSet rs = CrudUtil.executeQuery("SELECT * FROM book WHERE book_id=?", id);
+
+            if (rs.next()) {
+                bookEntity = new BookEntity(
+                        rs.getString("title"),
+                        rs.getString("author"),
+                        rs.getString("category_id"),
+                        rs.getString("quantity")
+                );
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // Log the exception or handle it appropriately
+        }
+        return bookEntity;
     }
 
     @Override
@@ -69,8 +119,9 @@ public class BookDaoImpl implements BookDao {
         ArrayList<BookEntity> bookEntitys = new ArrayList<>();
         ResultSet rst = CrudUtil.executeQuery("SELECT * FROM book");
         while (rst.next()) {
-            BookEntity bookEntity = new BookEntity(rst.getString("book_id"), rst.getString("title"), rst.getString("author"),rst.getString("quantity"),rst.getString("published_year"));
+            BookEntity bookEntity = new BookEntity(rst.getString("book_id"), rst.getString("title"), rst.getString("author"),rst.getString("category_id") ,rst.getString("quantity"));
             bookEntitys.add(bookEntity);
+            System.out.println(bookEntitys);
         }
 
         return bookEntitys;

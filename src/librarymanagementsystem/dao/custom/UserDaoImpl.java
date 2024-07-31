@@ -12,14 +12,14 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public String save(UserEntity entity) throws Exception {
-          boolean isSaved = CrudUtil.executeUpdate("INSERT INTO user VALUES(?,?,?)",
+          boolean isSaved = CrudUtil.executeUpdate("INSERT INTO user(username,password,mobile)VALUES(?,?,?)",
                 entity.getUsername(), entity.getPassword(), entity.getContactNumber());
         return isSaved ? "Success" : "Fail";
     }
 
     @Override
     public String update(UserEntity t) throws Exception {
-        return null;
+      return null;
     }
 
     @Override
@@ -38,7 +38,7 @@ public class UserDaoImpl implements UserDao {
         ArrayList<UserEntity> userEntitys = new ArrayList<>();
         ResultSet rst = CrudUtil.executeQuery("SELECT * FROM user");
         while (rst.next()) {
-            UserEntity entity = new UserEntity(rst.getString("username"), rst.getString("password"), rst.getString("contact_number"));
+            UserEntity entity = new UserEntity(rst.getString("username"), rst.getString("password"), rst.getString("mobile"));
 //            System.out.println(rst.getString("username"));
 //                   System.out.println(rst.getString("password"));
 //                          System.out.println(rst.getString("contact_number"));

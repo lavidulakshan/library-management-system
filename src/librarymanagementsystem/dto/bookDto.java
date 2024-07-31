@@ -3,11 +3,14 @@ package librarymanagementsystem.dto;
 import java.util.List;
 
 public class bookDto {
+    private String bookId;
 
     private String title;
     private String author;
     private String Category;
-    private String Date;
+    
+    private String categoryId;
+    
     private String quantity;
 
 //    private List<bookDto> bookDtos;
@@ -15,6 +18,27 @@ public class bookDto {
     public bookDto() {
 
     }
+
+    public bookDto(String bookId, String title, String author, String Category, String categoryId, String quantity) {
+        this.bookId = bookId;
+        this.title = title;
+        this.author = author;
+        this.Category = Category;
+        this.categoryId = categoryId;
+        this.quantity = quantity;
+    }
+    
+    
+
+    public bookDto(String bookId, String title, String author, String Category, String quantity) {
+        this.bookId = bookId;
+        this.title = title;
+        this.author = author;
+        this.Category = Category;
+        this.quantity = quantity;
+    }
+    
+    
 
 //    public bookDto(String title, String author, String Category, String Date, List<bookDto> bookDtos) {
 //        this.title = title;
@@ -24,13 +48,23 @@ public class bookDto {
 //        this.bookDtos = bookDtos;
 //    }
 
-    public bookDto(String title, String author, String Category, String Date, String quantity) {
+    public bookDto(String title, String author, String Category, String quantity) {
         this.title = title;
         this.author = author;
         this.Category = Category;
-        this.Date = Date;
+        
         this.quantity = quantity;
     }
+
+    public String getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
+    }
+    
+    
 
     public String getQuantity() {
         return quantity;
@@ -38,6 +72,14 @@ public class bookDto {
 
     public void setQuantity(String quantity) {
         this.quantity = quantity;
+    }
+
+    public String getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(String bookId) {
+        this.bookId = bookId;
     }
 
    
@@ -70,18 +112,18 @@ public class bookDto {
         this.Category = Category;
     }
 
-    public String getDate() {
-        return Date;
-    }
-
-    public void setDate(String Date) {
-        this.Date = Date;
-    }
-
     @Override
     public String toString() {
-        return "bookDto{" + "title=" + title + ", author=" + author + ", Category=" + Category + ", Date=" + Date + ", quantity=" + quantity + '}';
+        return "bookDto{" + "bookId=" + bookId + ", title=" + title + ", author=" + author + ", Category=" + Category + ", quantity=" + quantity + '}';
     }
+
+    public String getcategoryId() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+   
+
+    
 
 
 }

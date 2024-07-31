@@ -6,28 +6,51 @@ package librarymanagementsystem.entity;
 
 public class BookEntity {
 
+    private String bookid;
     private String title;
     private String author;
     private String Category;
-    private String Date;
-
-    public int CategoryId;
-
+    public String CategoryId;
     private String quantity;
 
-    public BookEntity(String title, String author, String Category, String Date, String quantity) {
+    public BookEntity(String title, String author, String categoryId, String quantity) {
+       
         this.title = title;
         this.author = author;
-        this.Category = Category;
-        this.Date = Date;
+        this.CategoryId = categoryId;
+        this.quantity = quantity;
+        
+    }
+ 
+    
+    public BookEntity() {
+    }
+
+    public BookEntity(String bookid, String title, String author, String CategoryId, String quantity) {
+        this.bookid = bookid;
+        this.title = title;
+        this.author = author;
         this.CategoryId = CategoryId;
         this.quantity = quantity;
     }
 
-    public BookEntity() {
+    
+
+    public String getBookid() {
+        return bookid;
+    }
+
+    public void setBookid(String bookid) {
+        this.bookid = bookid;
     }
 
     
+
+//    public BookEntity(String title, String author, String quantity) {
+//        this.title = title;
+//        this.author = author;
+//        this.quantity = quantity;
+//    }
 
    
 
@@ -38,11 +61,11 @@ public class BookEntity {
 //    public void setCategoryId(int CategoryId) {
 //        this.CategoryId = CategoryId;
 //    }
-    public int getCategoryId() {
+    public String getCategoryId() {
         return CategoryId;
     }
 
-    public void setCategoryId(int CategoryId) {
+    public void setCategoryId(String CategoryId) {
         this.CategoryId = CategoryId;
     }
 
@@ -53,8 +76,6 @@ public class BookEntity {
     public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
-
-  
 
     public String getTitle() {
         return title;
@@ -80,17 +101,13 @@ public class BookEntity {
         this.Category = Category;
     }
 
-    public String getDate() {
-        return Date;
-    }
-
-    public void setDate(String Date) {
-        this.Date = Date;
-    }
-
     @Override
     public String toString() {
-        return "BookEntity{" + "title=" + title + ", author=" + author + ", Category=" + Category + ", Date=" + Date + ", CategoryId=" + CategoryId + ", quantity=" + quantity + '}';
+        return "BookEntity{" + "bookid=" + bookid + ", title=" + title + ", author=" + author + ", Category=" + Category + ", CategoryId=" + CategoryId + ", quantity=" + quantity + '}';
     }
+    
+    
+    
+    
 
 }

@@ -32,7 +32,9 @@ public class BokkServiceImpl implements BookService {
 
     @Override
     public String update(bookDto dto) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        return null;
+
     }
 
     @Override
@@ -45,15 +47,15 @@ public class BokkServiceImpl implements BookService {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-        @Override
+    @Override
     public ArrayList<bookDto> getAll() throws Exception {
         ArrayList<bookDto> bookdtos = new ArrayList<>();
         ArrayList<BookEntity> BookEntitys = BookDao.getAll();
         for (BookEntity BookEntity1 : BookEntitys) {
-              bookDto bDto = getBookDto(BookEntity1);
-            
+            bookDto bDto = getBookDto(BookEntity1);
+
             bookdtos.add(bDto);
-            
+
         }
         return bookdtos;
     }
@@ -64,18 +66,19 @@ public class BokkServiceImpl implements BookService {
     }
 
     private BookEntity getBookEntity(bookDto dto) {
+        System.out.println("dto :" + dto);
 //        BookEntity bookEntity = new BookEntity(dto.getTitle(), dto.getAuthor(), dto.getCategory(), dto.getDate(),dto.getQuantity());
-        
-        BookEntity bookEntity = new BookEntity(dto.getTitle(), dto.getAuthor(), dto.getCategory(), dto.getDate(), dto.getQuantity());
+
+        BookEntity bookEntity = new BookEntity(dto.getTitle(), dto.getAuthor(), dto.getCategory(), dto.getQuantity());
         System.out.println(dto.getQuantity());
 
         return bookEntity;
     }
-    
-      private bookDto getBookDto(BookEntity entity) {
-       bookDto bDto = new bookDto(entity.getTitle(), entity.getAuthor(), entity.getCategory(), entity.getDate(),entity.getQuantity());
-//          System.out.println(entity.getUsername());
-//          System.out.println(entity.getPassword());
+
+    private bookDto getBookDto(BookEntity entity) {
+        System.out.println("entity value :" + entity);
+        bookDto bDto = new bookDto(entity.getBookid(), entity.getTitle(), entity.getAuthor(), entity.getCategory(), entity.getCategoryId(),entity.getQuantity());
+        System.out.println("bdto : "+ bDto);
         return bDto;
     }
 
