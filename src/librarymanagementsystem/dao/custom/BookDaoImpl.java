@@ -74,6 +74,7 @@ public class BookDaoImpl implements BookDao {
                     t.getCategoryId(),
                     t.getQuantity(),
                     t.getTitle());
+            
 
             if (isUpdated) {
                 return "Book updated successfully.";

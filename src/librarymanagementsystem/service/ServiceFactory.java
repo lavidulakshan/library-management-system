@@ -3,6 +3,7 @@ package librarymanagementsystem.service;
 import librarymanagementsystem.service.custom.impl.BokkServiceImpl;
 import librarymanagementsystem.service.custom.impl.CategoryserviceImpl;
 import librarymanagementsystem.service.custom.impl.MemberServiceImpl;
+import librarymanagementsystem.service.custom.impl.ReturnTransactionSrviceImpl;
 import librarymanagementsystem.service.custom.impl.TranSactiionServiceImpl;
 import librarymanagementsystem.service.custom.impl.UserServiceimpl;
 
@@ -35,6 +36,8 @@ public class ServiceFactory {
                 return new MemberServiceImpl();
                  case TRANSACTION:
                return new TranSactiionServiceImpl();
+                case RETURNTRANSACTION:
+               return new ReturnTransactionSrviceImpl();
 
             default:
                 return null;
@@ -42,7 +45,7 @@ public class ServiceFactory {
     }
 
     public enum ServiceType {
-        USER, CATEGORY, BOOK ,MEMBER ,TRANSACTION
+        USER, CATEGORY, BOOK ,MEMBER ,TRANSACTION ,RETURNTRANSACTION
     }
 
 }

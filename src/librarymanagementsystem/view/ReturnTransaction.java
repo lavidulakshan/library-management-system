@@ -10,7 +10,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+import javax.swing.JOptionPane;
+import librarymanagementsystem.controller.newpackage.ReturnTransactionController;
 import librarymanagementsystem.controller.newpackage.TranSactionController;
+import librarymanagementsystem.dto.ReturnTransactionDto;
 import librarymanagementsystem.dto.TranSactionDto;
 
 /**
@@ -24,7 +27,9 @@ public class ReturnTransaction extends javax.swing.JFrame {
      */
     String today;
     private TranSactionController tranSactionController;
-
+    
+    private ReturnTransactionController returnTransactionController;
+    
     public ReturnTransaction() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -32,7 +37,8 @@ public class ReturnTransaction extends javax.swing.JFrame {
         rdate.setText(date);
         rdate.setForeground(Color.RED);
         this.tranSactionController = new TranSactionController();
-
+        this.returnTransactionController = new ReturnTransactionController();
+        
     }
 
     /**
@@ -58,6 +64,9 @@ public class ReturnTransaction extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        bookId = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,7 +88,7 @@ public class ReturnTransaction extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Member Name :");
+        jLabel4.setText("Member ID :");
 
         mname.setText("..");
 
@@ -106,6 +115,17 @@ public class ReturnTransaction extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel5.setText("Your FIneAmount Is  :  ");
 
+        bookId.setText("..");
+
+        jLabel10.setText("Book ID :");
+
+        jButton1.setText("SAVE");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -128,32 +148,42 @@ public class ReturnTransaction extends javax.swing.JFrame {
                                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
-                                                .addGap(18, 18, 18)
-                                                .addComponent(mname, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                            .addGroup(layout.createSequentialGroup()
                                                 .addGap(12, 12, 12)
                                                 .addComponent(famount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(jTextField1)
-                                                .addGap(7, 7, 7))))
+                                                .addGap(7, 7, 7))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(6, 6, 6)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(bookId, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(rdate)
+                                                        .addComponent(due, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)))
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(mname, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(40, 40, 40)
-                                        .addComponent(rdate))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(0, 0, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(39, 39, 39)
                                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                                .addComponent(due, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(11, 11, 11)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(143, Short.MAX_VALUE)
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(232, 232, 232))
+                .addGap(101, 101, 101)
+                .addComponent(jButton1)
+                .addGap(34, 34, 34))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,7 +196,11 @@ public class ReturnTransaction extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(35, 35, 35)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addComponent(bookId, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(mname, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -174,7 +208,7 @@ public class ReturnTransaction extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(due, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(rdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -182,11 +216,17 @@ public class ReturnTransaction extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(famount, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(15, 15, 15))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)
+                        .addGap(16, 16, 16))))
         );
 
         pack();
@@ -207,6 +247,10 @@ public class ReturnTransaction extends javax.swing.JFrame {
     private void dueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dueActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_dueActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Save();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -244,9 +288,12 @@ public class ReturnTransaction extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel bookId;
     private javax.swing.JTextField due;
     private javax.swing.JLabel famount;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -264,57 +311,84 @@ public class ReturnTransaction extends javax.swing.JFrame {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         today = sdf.format(new Date());
         System.out.println(today);
-
+        
         return today;
-
+        
     }
-
+    
     public void SearchTransaction() {
-
+        
         String transId = jTextField1.getText();
-
+        
         try {
             TranSactionDto dto = tranSactionController.getTransaction(transId);
-
+            
             mname.setText(dto.getMemberId());
             due.setText(dto.getDueDate());
-            
+            bookId.setText(dto.getBookId());
+
 //            System.out.println(today);
 //            System.out.println(dto.getDueDate());
-            
-         String amount=   fineAmount(today, dto.getDueDate());
-         famount.setText(amount);
-         jLabel7.setText(amount);
-         jLabel7.setForeground(Color.RED);
+            long amount = fineAmount(today, dto.getDueDate());
+            famount.setText(Long.toString(amount));
+            jLabel7.setText(Long.toString(amount));
+            jLabel7.setForeground(Color.RED);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        
     }
-
-    public String fineAmount(String today, String dueDate) {
+    
+    public long fineAmount(String today, String dueDate) {
         
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         
-       
         LocalDate todayDate = LocalDate.parse(today, formatter);
         LocalDate dueDateDate = LocalDate.parse(dueDate, formatter);
         
+        long daysBetween = ChronoUnit.DAYS.between(dueDateDate, todayDate);
         
-        long daysBetween = ChronoUnit.DAYS.between(dueDateDate,todayDate);
-        System.out.println(daysBetween);
-        
-  
         long fine = 0;
         if (daysBetween > 0) {
             fine = daysBetween * 5;
         }
         
-       
-        return "Rs " + fine;
+        return fine;
     }
-
-   
-
+    
+    public void Save() {
+        
+        try {
+            
+            int transId = Integer.parseInt(jTextField1.getText());
+            String rDate = rdate.getText();
+            Double fineAmount = Double.parseDouble(famount.getText());
+            
+            ReturnTransactionDto rtd = new ReturnTransactionDto(transId, rDate, fineAmount);
+            
+            String res = returnTransactionController.save(rtd);
+            
+            if ("Success".equals(res)) {
+                JOptionPane.showMessageDialog(this, "Successfully added!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                clearForm();
+                
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
+    
+    public void clearForm() {
+        jTextField1.setText("");
+        bookId.setText("");
+        mname.setText("");
+        due.setText("");
+        rdate.setText("");
+        famount.setText("");
+        
+    }
+    
 }
