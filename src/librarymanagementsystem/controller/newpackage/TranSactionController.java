@@ -4,6 +4,7 @@
  */
 package librarymanagementsystem.controller.newpackage;
 
+import java.util.ArrayList;
 import librarymanagementsystem.dto.TranSactionDto;
 import librarymanagementsystem.dto.UserDto;
 import librarymanagementsystem.service.ServiceFactory;
@@ -23,7 +24,18 @@ public class TranSactionController {
 //        System.out.println(tranSactionDto.getMemberId());
 
         return tranSactionService.save(tranSactionDto);
-        
+
+    }
+
+    public ArrayList<TranSactionDto> getAll() throws Exception {
+
+        return tranSactionService.getAll();
+    }
+    
+    
+    public TranSactionDto getTransaction(String transId) throws Exception {
+
+        return tranSactionService.get(transId);
 
     }
 

@@ -21,10 +21,10 @@ public interface TranSactionService extends SuperService{
 
     public String delete(String code) throws Exception;
 
-    public UserDto get(String code) throws Exception;
+    public TranSactionDto get(String code) throws Exception;
 
-    public ArrayList<UserDto> getAll() throws Exception;
+    public ArrayList<TranSactionDto> getAll() throws Exception;
     
-    public String getCustomer(TranSactionDto userDto)throws Exception;
+    public String getTransaction(TranSactionDto userDto)throws Exception;
     
 }

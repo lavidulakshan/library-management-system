@@ -59,6 +59,10 @@ public class MemberDaoImpl implements MemberDao {
 
     }
 
+   
+
+    
+
     @Override
     public String getCustomer(MemberEntity t) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

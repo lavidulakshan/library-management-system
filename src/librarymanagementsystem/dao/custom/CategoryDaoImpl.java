@@ -56,6 +56,10 @@ public class CategoryDaoImpl implements CategoryDao {
         return list;
     }
 
+   
+
+   
+
     @Override
     public String getCustomer(CategoryEntity t) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

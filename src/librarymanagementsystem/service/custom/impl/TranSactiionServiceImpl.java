@@ -17,6 +17,7 @@ import librarymanagementsystem.dto.UserDto;
 import librarymanagementsystem.dto.bookDto;
 import librarymanagementsystem.entity.BookEntity;
 import librarymanagementsystem.entity.TranSactionEntity;
+import librarymanagementsystem.entity.UserEntity;
 import librarymanagementsystem.service.custom.TranSactionService;
 
 /**
@@ -107,18 +108,27 @@ public class TranSactiionServiceImpl implements TranSactionService {
     }
 
     @Override
-    public UserDto get(String code) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public TranSactionDto get(String code) throws Exception {
+        
+      TranSactionEntity tranSactionEntity =   tranSactionDao.get(code);
+      return new TranSactionDto(tranSactionEntity.getBookId(), tranSactionEntity.getMemberId(), tranSactionEntity.getToday(), tranSactionEntity.getDueDate());
+        
     }
 
     @Override
-    public ArrayList<UserDto> getAll() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public ArrayList<TranSactionDto> getAll() throws Exception {
+        return null;
+        
+        
     }
 
     @Override
-    public String getCustomer(TranSactionDto userDto) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public String getTransaction(TranSactionDto tranSactionDto) throws Exception {
+        
+          TranSactionEntity entity = getTransactionEntity(tranSactionDto);
+        return tranSactionDao.getCustomer(entity); 
+        
+        
     }
 
     private TranSactionEntity getTransactionEntity(TranSactionDto dto) {
@@ -129,6 +139,13 @@ public class TranSactiionServiceImpl implements TranSactionService {
         System.out.println(dto.getMemberId());
 
         return tranSactionEntity;
+    }
+    
+    private TranSactionDto getTranSactionDto(TranSactionEntity entity){
+        
+        return null;
+    
+    
     }
 
 }
