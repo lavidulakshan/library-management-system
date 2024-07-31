@@ -171,54 +171,54 @@ public class WelcomeView extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-//    public static void main(String args[]) {
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(WelcomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(WelcomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(WelcomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(WelcomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//
-//        WelcomeView load = new WelcomeView();
-//        load.setVisible(true);
-//
-//        SwingWorker<Void, Integer> worker = new SwingWorker<Void, Integer>() {
-//            @Override
-//            protected Void doInBackground() throws Exception {
-//                for (int i = 0; i <= 100; i++) {
-//                    Thread.sleep(50); // Simulate work
-//                    publish(i); // Send progress to process method
-//                }
-//                return null;
-//            }
-//
-//            @Override
-//            protected void process(java.util.List<Integer> chunks) {
-//                for (int value : chunks) {
-//                    load.progress.setValue(value); // Update progress bar
-//                }
-//            }
-//
+    public static void main(String args[]) {
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(WelcomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(WelcomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(WelcomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(WelcomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+        WelcomeView load = new WelcomeView();
+        load.setVisible(true);
+
+        SwingWorker<Void, Integer> worker = new SwingWorker<Void, Integer>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                for (int i = 0; i <= 100; i++) {
+                    Thread.sleep(50); // Simulate work
+                    publish(i); // Send progress to process method
+                }
+                return null;
+            }
+
+            @Override
+            protected void process(java.util.List<Integer> chunks) {
+                for (int value : chunks) {
+                    load.progress.setValue(value); // Update progress bar
+                }
+            }
+
 //            @Override
 //            protected void done() {
 //                HomePage home = new HomePage();
 //                home.setVisible(true);
 //                load.setVisible(false);
 //            }
-//        };
-//
-//        worker.execute(); // Start the SwingWorker
-//    }
+        };
+
+        worker.execute(); // Start the SwingWorker
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

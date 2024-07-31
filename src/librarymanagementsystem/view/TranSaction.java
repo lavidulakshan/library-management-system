@@ -31,11 +31,11 @@ public class TranSaction extends javax.swing.JFrame {
      * Creates new form TranSaction
      */
     private TranSactionController tranSactionController;
-
+    
     private BookController bookController;
-
+    
     String today;
-
+    
     public TranSaction() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -46,23 +46,23 @@ public class TranSaction extends javax.swing.JFrame {
 //        openMemberRegistrationDialog();
 
     }
-
+    
     public JTextField getjTextField1() {
         return jTextField1;
     }
-
+    
     public JTextField getjTextField2() {
         return jTextField2;
     }
-
+    
     public JTextField getjTextField3() {
         return jTextField3;
     }
-
+    
     public JTextField getjTextField4() {
         return jTextField4;
     }
-
+    
     public String calculateDate() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         today = sdf.format(new Date());
@@ -70,9 +70,9 @@ public class TranSaction extends javax.swing.JFrame {
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
-
+        
         calendar.add(Calendar.DAY_OF_MONTH, 7);
-
+        
         Date nextWeek = calendar.getTime();
         String nextWeekDate = sdf.format(nextWeek);
 //        System.out.println("Date After a Week: " + nextWeekDate);
@@ -105,7 +105,7 @@ public class TranSaction extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jButton17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton17.setText("SELECT BOOK ");
@@ -361,7 +361,7 @@ public class TranSaction extends javax.swing.JFrame {
 
     public void ConfirmTranSaction() {
         try {
-
+            
             String memberId = jTextField3.getText();
             String bookID = jTextField4.getText();
             String dueDate = jLabel6.getText();
@@ -373,18 +373,19 @@ public class TranSaction extends javax.swing.JFrame {
             String res = tranSactionController.save(tranSactionDto);
             if ("Success".equals(res)) {
                 JOptionPane.showMessageDialog(this, "Successfully added!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                clearForm();
             } else {
                 JOptionPane.showMessageDialog(this, res, "Error", JOptionPane.ERROR_MESSAGE);
             }
-
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        
     }
-
+    
     public void updateTable() {
-
+        
         String[] columns = {"Book Name", "Author", "Quantity"};
         DefaultTableModel dtm = new DefaultTableModel(columns, 0) {
             @Override
@@ -398,7 +399,7 @@ public class TranSaction extends javax.swing.JFrame {
         try {
             ArrayList<bookDto> bDtos = bookController.getAll();
             boolean hasZeroQuantity = false;
-
+            
             for (bookDto bDto : bDtos) {
                 // Convert quantity from String to int
                 int quantity = Integer.parseInt(bDto.getQuantity());
@@ -420,7 +421,7 @@ public class TranSaction extends javax.swing.JFrame {
                         JOptionPane.WARNING_MESSAGE
                 );
             }
-
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -442,9 +443,17 @@ public class TranSaction extends javax.swing.JFrame {
                 } else {
                     setToolTipText(null); // Clear tooltip for other columns
                 }
-
+                
                 return cellComponent;
             }
         });
+    }
+    
+    public void clearForm() {
+        jTextField3.setText("");
+        jTextField1.setText("");
+        jTextField4.setText("");
+        jTextField2.setText("");
+        
     }
 }

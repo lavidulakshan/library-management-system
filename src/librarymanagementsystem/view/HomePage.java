@@ -30,7 +30,6 @@ public class HomePage extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jButton16 = new javax.swing.JButton();
         jButton17 = new javax.swing.JButton();
-        jButton18 = new javax.swing.JButton();
         jButton19 = new javax.swing.JButton();
         jButton20 = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JSeparator();
@@ -43,7 +42,7 @@ public class HomePage extends javax.swing.JFrame {
         jPanel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         jButton16.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton16.setText("Sales");
+        jButton16.setText("Transactions");
         jButton16.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton16.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton16.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -58,7 +57,7 @@ public class HomePage extends javax.swing.JFrame {
         });
 
         jButton17.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton17.setText("Suppliers");
+        jButton17.setText("Category");
         jButton17.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton17.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton17.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -72,23 +71,8 @@ public class HomePage extends javax.swing.JFrame {
             }
         });
 
-        jButton18.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton18.setText("Books");
-        jButton18.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton18.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton18.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jButton18FocusGained(evt);
-            }
-        });
-        jButton18.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton18ActionPerformed(evt);
-            }
-        });
-
         jButton19.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton19.setText("Customers");
+        jButton19.setText("Return");
         jButton19.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton19.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton19.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -127,10 +111,9 @@ public class HomePage extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -140,15 +123,13 @@ public class HomePage extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(118, Short.MAX_VALUE))
             .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
@@ -180,7 +161,7 @@ public class HomePage extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -192,7 +173,8 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton16FocusGained
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-        
+        TranSaction tranSaction = new TranSaction();
+        tranSaction.setVisible(true);
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton17FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton17FocusGained
@@ -200,16 +182,9 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton17FocusGained
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-     
+    categoryRegistration caRegistration = new categoryRegistration();
+    caRegistration.setVisible(true);
     }//GEN-LAST:event_jButton17ActionPerformed
-
-    private void jButton18FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton18FocusGained
-
-    }//GEN-LAST:event_jButton18FocusGained
-
-    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
-      
-    }//GEN-LAST:event_jButton18ActionPerformed
 
     private void jButton19FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton19FocusGained
 
@@ -267,7 +242,6 @@ new UserRegistration().setVisible(true);
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton17;
-    private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton20;
     private javax.swing.JLabel jLabel1;
