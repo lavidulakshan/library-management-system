@@ -29,6 +29,7 @@ public class ReturnTransactionSrviceImpl implements ReturnTransactionService {
     @Override
     public String save(ReturnTransactionDto dto) throws Exception {
         Connection connection = DBConnection.getInstance().getConnection();
+        System.out.println(dto);
 
     try {
         connection.setAutoCommit(false);
@@ -46,7 +47,7 @@ public class ReturnTransactionSrviceImpl implements ReturnTransactionService {
 
         // Update book quantity
         System.out.println("Retrieving book with ID: " + dto.getTransId());
-        BookEntity bookEntity = BookDao.get(String.valueOf(dto.getTransId()));
+        BookEntity bookEntity = BookDao.get(String.valueOf(dto.getBookId()));
         if (bookEntity == null) {
             System.out.println("Book not found.");
             connection.rollback();
@@ -121,7 +122,7 @@ public class ReturnTransactionSrviceImpl implements ReturnTransactionService {
 
     public ReturnTransactionEntity getReturnTransactionEntity(ReturnTransactionDto dto) {
 
-        ReturnTransactionEntity returnTransactionEntity = new ReturnTransactionEntity(dto.getTransId(), dto.getRdate(), dto.getFineAmount());
+        ReturnTransactionEntity returnTransactionEntity = new ReturnTransactionEntity(dto.getTransId(), dto.getRdate(), dto.getFineAmount(),dto.getBookId());
         return returnTransactionEntity;
 
     }

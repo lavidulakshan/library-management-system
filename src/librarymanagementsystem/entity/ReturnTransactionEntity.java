@@ -13,15 +13,34 @@ public class ReturnTransactionEntity {
      private int transId;
     private String rdate;
     private double fineAmount;
+    
+    private int  bookId;
 
     public ReturnTransactionEntity() {
     }
+
+    public ReturnTransactionEntity(int transId, String rdate, double fineAmount, int bookId) {
+        this.transId = transId;
+        this.rdate = rdate;
+        this.fineAmount = fineAmount;
+        this.bookId = bookId;
+    }
+    
 
     public ReturnTransactionEntity(int transId, String rdate, double fineAmount) {
         this.transId = transId;
         this.rdate = rdate;
         this.fineAmount = fineAmount;
     }
+
+    public int getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(int bookId) {
+        this.bookId = bookId;
+    }
+    
 
     public int getTransId() {
         return transId;
@@ -49,8 +68,9 @@ public class ReturnTransactionEntity {
 
     @Override
     public String toString() {
-        return "ReturnTransactionEntity{" + "transId=" + transId + ", rdate=" + rdate + ", fineAmount=" + fineAmount + '}';
+        return "ReturnTransactionEntity{" + "transId=" + transId + ", rdate=" + rdate + ", fineAmount=" + fineAmount + ", bookId=" + bookId + '}';
     }
+
     
     
     

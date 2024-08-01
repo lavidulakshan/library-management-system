@@ -182,8 +182,8 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton17FocusGained
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-    categoryRegistration caRegistration = new categoryRegistration();
-    caRegistration.setVisible(true);
+        categoryRegistration caRegistration = new categoryRegistration();
+        caRegistration.setVisible(true);
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jButton19FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton19FocusGained
@@ -191,7 +191,9 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton19FocusGained
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
-        
+        ReturnTransaction rtrnas = new ReturnTransaction();
+        rtrnas.setVisible(true);
+
     }//GEN-LAST:event_jButton19ActionPerformed
 
     private void jButton20FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton20FocusGained
@@ -199,8 +201,8 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton20FocusGained
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-new UserRegistration().setVisible(true);
-     
+        new UserRegistration().setVisible(true);
+
 
     }//GEN-LAST:event_jButton20ActionPerformed
 
